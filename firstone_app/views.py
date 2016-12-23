@@ -70,3 +70,9 @@ def blog_index(request):
 		return render(request, 'blog_index.html')
 	else:
 		return HttpResponseRedirect("/login/")
+
+def question_update(request):
+	if request.user is not None and request.user.is_active:
+		return render(request, 'question_update.html')
+	else:
+		return HttpResponseRedirect("/login/")

@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^logout/', firstone_app_views.logout, name='logout'),
     url(r'^userpage/', firstone_app_views.userpage, name='userpage'),
     url(r'^blog_index/', firstone_app_views.blog_index, name='blog_index'),
+	url(r'^question_update/', firstone_app_views.question_update, name='question_update'),
     url(r'^admin/', admin.site.urls),
 ]
