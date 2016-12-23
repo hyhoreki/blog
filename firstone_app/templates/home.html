@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<title>欢迎</title>
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<img style="border-radius: 50%;border: none" src="/static/img/man_800.jpg" class="img-responsive" alt="图片加载失败">
+			</div>
+		{% if request.user.is_authenticated %}
+			<div class="col-xs-8">
+				<h1 style="text-align:center;">{{ request.user.first_name }}，您好！</h1>
+			</div>
+		{% else %}
+			<div class="col-xs-8">
+				<h1 style="text-align:center;">亲爱的访客，您好！</h1>
+			</div>
+		{% endif %}
+			<div class="col-xs-2">
+				<img style="border-radius: 50%;border: none" src="/static/img/man_800.jpg" class="img-responsive" alt="图片加载失败">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="nav nav-pills nav-justified">
+					<li><a href="{% url 'userpage' %}">用户中心</a></li>
+					<li class="active"><a href="{% url 'blog_index' %}">进入应用</a></li>
+					<li><a href="">联系我们</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="carousel_one" class="carousel slide">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel_one" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel_one" data-slide-to="1"></li>
+						<li data-target="#carousel_one" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active">
+							<img src="/static/img/lun_1500_01.jpg" class="img-responsive" alt="轮播图1加载失败">
+						</div>
+						<div class="item">
+							<img src="/static/img/lun_1500_02.jpg" class="img-responsive" alt="轮播图2加载失败">
+						</div>
+						<div class="item">
+							<img src="/static/img/lun_1500_03.jpg" class="img-responsive" alt="轮播图3加载失败">
+						</div>
+					</div>
+						<a class="carousel-control left" href="#carousel_one" data-slide="prev">&lsaquo;</a>
+						<a class="carousel-control right" href="#carousel_one" data-slide="next">&rsaquo;</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
