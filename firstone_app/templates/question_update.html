@@ -12,11 +12,17 @@
 <body>
 	<div class="container">
 		{% include 'nav.html' %}
+		<p style="width:10px;"></p>
 		<div class="row">
 			<div class="col-xs-1">
 				<a href="{% url 'blog_index' %}" class="glyphicon glyphicon-chevron-left" style="color: #428bca; font-size: 20px;"></a>
 			</div>
 			<div class="col-xs-10">
+				<form method="POST">
+					{% csrf_token %}
+					<div class="input-group" style="width:100%;">
+						<input name="question_title" type="text" class="form-control" placeholder="问题标题">
+					</div>
 			</div>
 		</div>
 	</div>
