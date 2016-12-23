@@ -1,0 +1,20 @@
+	<div class="row well-sm" style="background-color:#428bca;">
+			<div class="col-xs-10">
+				<p style="color:#fff;">{{ request.user.first_name }}，欢迎使用本应用</p>
+			</div>
+			<div class="col-xs-1">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;">用户<span class="caret"></span></a>
+				<ul class="dropdown-menu" style="min-width:100px;">
+					<li><a href="{% url 'userpage' %}">个人中心</a></li>
+					<li><a href="{% url 'userpage' %}">消息</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-1">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;">快速链接<span class="caret"></span></a>
+				<ul class="dropdown-menu" style="min-width:100px;">
+					<li><a href="{% url 'userpage' %}">ta的问题</a></li>
+					<li><a href="{% url 'userpage' %}">ta的动态</a></li>
+					<li><a href="{% url 'userpage' %}">给ta提问</a></li>
+				</ul>
+			</div>
+		</div>

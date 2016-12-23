@@ -11,6 +11,7 @@
 
 <body>
 	<div class="container">
+		{% include 'nav.html' %}
 		<div class="row well-sm" style="background-color:#428bca;">
 			<div class="col-xs-10">
 				<p style="color:#fff;">{{ request.user.first_name }}，欢迎使用本应用</p>
