@@ -2060,7 +2060,7 @@
   $.extend($.summernote.lang, {
     'en-US': {
       font: {
-        bold: 'Bold',
+        bold: '粗体',
         italic: 'Italic',
         underline: 'Underline',
         clear: 'Remove Font Style',
