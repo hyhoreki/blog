@@ -2062,10 +2062,10 @@
       font: {
         bold: '粗体',
         italic: 'Italic',
-        underline: 'Underline',
-        clear: 'Remove Font Style',
+        underline: '下划线',
+        clear: '清除格式',
         height: 'Line Height',
-        name: 'Font Family',
+        name: '选择字体',
         strikethrough: 'Strikethrough',
         subscript: 'Subscript',
         superscript: 'Superscript',
