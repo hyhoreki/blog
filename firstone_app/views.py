@@ -73,7 +73,7 @@ def blog_index(request):
 		return HttpResponseRedirect("/login/")
 
 def question_update(request):
-	if request.user is not None and request.user.is_active:'
+	if request.user is not None and request.user.is_active:
 		if request.method=="POST"
 			user_id=request.user.id
 			question_title=request.POST.get('question_title','')
