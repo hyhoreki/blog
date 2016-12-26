@@ -18,10 +18,19 @@
 				<a href="{% url 'blog_index' %}" class="glyphicon glyphicon-chevron-left" style="color: #428bca; font-size: 20px;"></a>
 			</div>
 			<div class="col-xs-10">
+				<div class="well well-lg">
+					<p>您可以在这里输入您的问题标题，问题描述和问题详细内容，完成问题的撰写。提交后您的问题将会随机分发给其他用户，他们的回答将会详细的展示给您。</p>
+				</div>
 				<form method="POST">
 					{% csrf_token %}
 					<div class="input-group" style="width:100%;">
 						<input name="question_title" type="text" class="form-control" placeholder="问题标题">
+					</div>
+					<div class="input-group" style="width:100%;">
+						<input name="question_describe" type="text" class="form-control" placeholder="问题描述">
+					</div>
+					<div class="input-group" style="width:100%;">
+						<textarea style="height:300px;" placeholder="问题详细内容"></textarea>
 					</div>
 			</div>
 		</div>
