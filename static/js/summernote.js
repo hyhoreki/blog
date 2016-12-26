@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Super simple wysiwyg editor v0.8.2
  * http://summernote.org/
  *
@@ -2072,7 +2072,7 @@
         size: 'Font Size'
       },
       image: {
-        image: 'Picture',
+        image: '图片',
         insert: 'Insert Image',
         resizeFull: 'Resize Full',
         resizeHalf: 'Resize Half',
@@ -2115,7 +2115,7 @@
         insert: 'Insert Horizontal Rule'
       },
       style: {
-        style: 'Style',
+        style: '格式',
         normal: 'Normal',
         blockquote: 'Quote',
         pre: 'Code',
@@ -2131,7 +2131,7 @@
         ordered: 'Ordered list'
       },
       options: {
-        help: 'Help',
+        help: '帮助',
         fullscreen: 'Full Screen',
         codeview: 'Code View'
       },
