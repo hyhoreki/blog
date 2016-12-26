@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.db import models
 
 def index(request):
 	return render(request, 'home.html')
@@ -72,7 +73,13 @@ def blog_index(request):
 		return HttpResponseRedirect("/login/")
 
 def question_update(request):
-	if request.user is not None and request.user.is_active:
+	if request.user is not None and request.user.is_active:'
+		if request.method=="POST"
+			user_id=request.user.id
+			question_title=request.POST.get('question_title','')
+			question_describe=request.POST.get('question_describe','')
+			question_text=request.POST.get('question_text','')
+			models.Questions.object.create(ask_user=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
 		return render(request, 'question_update.html')
 	else:
 		return HttpResponseRedirect("/login/")
