@@ -10,7 +10,7 @@ class Passage(models.Model):
 	
 class Questions(models.Model):
 	ask_user=models.IntegerField()
-	answer_user=models.IntegerField()
+	answer_user=models.IntegerField(blank=true)
 	question_title=models.CharField(max_length=500)
 	question_describe=models.CharField(max_length=500)
 	question_text=models.CharField(max_length=3000)
