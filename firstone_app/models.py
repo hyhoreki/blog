@@ -8,7 +8,7 @@ class Passage(models.Model):
 	def __str__(self):
 		return self.title
 	
-class Questions(models.Model):
+class Question(models.Model):
 	ask_user=models.IntegerField()
 	answer_user=models.IntegerField(null=True)
 	question_title=models.CharField(max_length=500)
