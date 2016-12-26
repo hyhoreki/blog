@@ -7,6 +7,9 @@
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 	<script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
+	<!-- include summernote css/js-->
+	<link href="/summernote/dist/summernote.css" rel="stylesheet">
+	<script src="/summernote/dist/summernote.js">
 </head>
 
 <body>
@@ -32,7 +35,12 @@
 					</div>
 					<p style="width:10px;"></p>
 					<div class="form-group" style="width:100%;">
-						<textarea name="question_text" style="height:300px;width:100%;" placeholder="问题详细内容"></textarea>
+						<textarea id="summernote" name="question_text" style="height:300px;width:100%;" placeholder="问题详细内容"></textarea>
+						<script>
+							$(document).ready(function(){
+								$('#summernote').summernote();
+							});
+						</script>
 					</div>
 					<p style="width:10px;"></p>
 					<div class="form-group col-xs-4 col-xs-offset-4">
