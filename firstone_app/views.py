@@ -84,3 +84,10 @@ def question_update(request):
 		return render(request, 'question_update.html')
 	else:
 		return HttpResponseRedirect("/login/")
+		
+def question_show(requesti, id):
+	if request.user is not None and request.user.is_active:
+		question=Question.objects.filter(id=id)
+		return render(request, 'question_show', {'question':question)
+	else:
+		return HttpResponseRedirect("/login/")
