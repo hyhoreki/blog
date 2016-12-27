@@ -68,7 +68,8 @@ def userpage(request):
 
 def blog_index(request):
 	if request.user is not None and request.user.is_active:
-		return render(request, 'blog_index.html')
+		questions=Question.objects.all()
+		return render(request, 'blog_index.html', {'questions':questions})
 	else:
 		return HttpResponseRedirect("/login/")
 
@@ -76,9 +77,9 @@ def question_update(request):
 	if request.user is not None and request.user.is_active:
 		if request.method=="POST":
 			user_id=request.user.id
-			question_title=request.POST.get('question_title','')
-			question_describe=request.POST.get('question_describe','')
-			question_text=request.POST.get('question_text','')
+			question_title=request.POST.get('question_title', '')
+			question_describe=request.POST.get('question_describe', '')
+			question_text=request.POST.get('question_text', '')
 			Question.objects.create(ask_user=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
 		return render(request, 'question_update.html')
 	else:
