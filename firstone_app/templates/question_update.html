@@ -38,7 +38,10 @@
 						<textarea id="summernote" name="question_text" placeholder="问题详细内容"></textarea>
 						<script>
 							$(document).ready(function(){
-								$('#summernote').summernote();
+								$('#summernote').summernote({
+									height: 300,
+									focus: true
+								});
 							});
 						</script>
 					</div>
