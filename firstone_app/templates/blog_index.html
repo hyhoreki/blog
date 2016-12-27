@@ -29,8 +29,9 @@
 					<div class="tab-pane fade" id="question">
 						<div class="col-xs-12">
 							{% for question in questions %}
-							<p>{{ question.question_title}}</p>
-							<p>{{ question.question_describe}}</p>
+							<div class="panel panel-default">
+								<div class="panel-body" style="color: #428bca;">{{ question.question_title}}</div>
+							<div class="panel-footer">&nbsp &nbsp {{ question.question_describe}}</div>
 							{% endfor %}
 						</div>
 						<div class="col-xs-2 col-xs-offset-10">

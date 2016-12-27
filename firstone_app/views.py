@@ -68,7 +68,7 @@ def userpage(request):
 
 def blog_index(request):
 	if request.user is not None and request.user.is_active:
-		questions=Question.objects.all()
+		questions=Question.objects.all()[:5]
 		return render(request, 'blog_index.html', {'questions':questions})
 	else:
 		return HttpResponseRedirect("/login/")
