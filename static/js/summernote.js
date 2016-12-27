@@ -2073,7 +2073,7 @@
       },
       image: {
         image: '图片',
-        insert: 'Insert Image',
+        insert: '添加图片',
         resizeFull: 'Resize Full',
         resizeHalf: 'Resize Half',
         resizeQuarter: 'Resize Quarter',
@@ -2089,27 +2089,27 @@
         selectFromFiles: 'Select from files',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',
-        url: 'Image URL',
+        url: '图片链接',
         remove: 'Remove Image'
       },
       video: {
-        video: 'Video',
+        video: '视频',
         videoLink: 'Video Link',
-        insert: 'Insert Video',
-        url: 'Video URL?',
+        insert: '添加视频',
+        url: '视频链接',
         providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
       },
       link: {
-        link: 'Link',
-        insert: 'Insert Link',
+        link: '链接',
+        insert: '添加链接',
         unlink: 'Unlink',
         edit: 'Edit',
-        textToDisplay: 'Text to display',
-        url: 'To what URL should this link go?',
-        openInNewWindow: 'Open in new window'
+        textToDisplay: '链接文字',
+        url: '链接地址',
+        openInNewWindow: '在新窗口打开'
       },
       table: {
-        table: 'Table'
+        table: '表格'
       },
       hr: {
         insert: 'Insert Horizontal Rule'
@@ -2119,40 +2119,40 @@
         normal: 'Normal',
         blockquote: 'Quote',
         pre: 'Code',
-        h1: 'Header 1',
-        h2: 'Header 2',
-        h3: 'Header 3',
-        h4: 'Header 4',
-        h5: 'Header 5',
-        h6: 'Header 6'
+        h1: '标题 1',
+        h2: '标题 2',
+        h3: '标题  3',
+        h4: '标题  4',
+        h5: '标题  5',
+        h6: '标题  6'
       },
       lists: {
-        unordered: 'Unordered list',
-        ordered: 'Ordered list'
+        unordered: '序号列表',
+        ordered: '数字列表'
       },
       options: {
         help: '帮助',
-        fullscreen: 'Full Screen',
-        codeview: 'Code View'
+        fullscreen: '全屏',
+        codeview: '代码视图'
       },
       paragraph: {
-        paragraph: 'Paragraph',
+        paragraph: '段落',
         outdent: 'Outdent',
         indent: 'Indent',
-        left: 'Align left',
-        center: 'Align center',
-        right: 'Align right',
-        justify: 'Justify full'
+        left: '左端对齐',
+        center: '居中对齐',
+        right: '右端对齐',
+        justify: '两端对齐'
       },
       color: {
-        recent: 'Recent Color',
-        more: 'More Color',
-        background: 'Background Color',
-        foreground: 'Foreground Color',
-        transparent: 'Transparent',
+        recent: '颜色设置',
+        more: '更多...',
+        background: '背景颜色',
+        foreground: '前景颜色',
+        transparent: '透明的',
         setTransparent: 'Set transparent',
         reset: 'Reset',
-        resetToDefault: 'Reset to default'
+        resetToDefault: '回到预设'
       },
       shortcut: {
         shortcuts: 'Keyboard shortcuts',
