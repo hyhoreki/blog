@@ -42,7 +42,12 @@
 								$('#summernote').summernote({
 									lang: 'zh-CN',
 									height: 300,
-									focus: true
+									focus: true,
+									callbacks: {
+										onImageUpload: function(files) {
+											alter('图片上传功能暂未开放，请使用图片链接')
+										}
+									}
 								});
 							});
 						</script>
