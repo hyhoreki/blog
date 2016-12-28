@@ -94,4 +94,7 @@ def question_show(request, id):
 	else:
 		return HttpResponseRedirect("/login/")
 		
+def blog_index_question_show_more(request):
+	questions=Question.objects.all().order_by('?')[:5]
+	return JsonResponse(questions)
 	
