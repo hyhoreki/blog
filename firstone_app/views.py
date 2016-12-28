@@ -96,5 +96,5 @@ def question_show(request, id):
 		
 def blog_index_question_show_more(request):
 	questions=Question.objects.all().order_by('?')[:5]
-	return JsonResponse(questions)
+	return JsonResponse(questions, safe=False)
 	
