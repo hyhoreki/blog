@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import *
 
 def index(request):
 	return render(request, 'home.html')
-def add(request,a,b):
-	c = int(a)+int(b)
-	return HttpResponse(str(c))
+	
 def login(request):
 	if request.method=='POST':
 		username=request.POST.get('username', '')
@@ -18,6 +17,7 @@ def login(request):
 			auth.login(request, user)
 			return HttpResponseRedirect("/userpage/")
 	return render(request, 'login.html')
+	
 def signup(request):
 	if request.method=='POST':
 		username=request.POST.get('username', '')
@@ -39,9 +39,11 @@ def signup(request):
 				auth.login(request, user)
 				return HttpResponseRedirect("/userpage/")
 	return render(request, 'signup.html')
+	
 def logout(request):
 	auth.logout(request)
 	return HttpResponseRedirect("/login/")
+	
 def userpage(request):
 	if request.user is not None and request.user.is_active:
 		if request.method=="POST":
@@ -68,7 +70,7 @@ def userpage(request):
 
 def blog_index(request):
 	if request.user is not None and request.user.is_active:
-		questions=Question.objects.all()[:5]
+		questions=Question.objects.all().order_by('?')[:5]
 		return render(request, 'blog_index.html', {'questions':questions})
 	else:
 		return HttpResponseRedirect("/login/")
@@ -91,3 +93,5 @@ def question_show(request, id):
 		return render(request, 'question_show.html', {'question':question})
 	else:
 		return HttpResponseRedirect("/login/")
+		
+	
