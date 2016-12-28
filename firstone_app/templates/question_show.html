@@ -22,7 +22,7 @@
 			<div class="panel panel-primary">
 				{% for question_one in question %}
 				<div class="panel-title">{{ question_one.question_title }}</div>
-				<div class="panel-body">{{ question_one.question_text }}</div>
+				<div class="panel-body"><textarea>{{ question_one.question_text }}</textarea></div>
 				{% endfor %}
 			</div>
 		</div>
