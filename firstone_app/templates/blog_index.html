@@ -35,12 +35,8 @@
 							</div>
 							{% endfor %}
 						</div>
-						<div class="col-xs-2 col-xs-offset-5">
-							<span class="glyphicon glyphicon-chevron-down" style="color: #428bca; font-size: 30px;"></span>
-						</div>
-						<div class="col-xs-2 col-xs-offset-10">
-							<a href="{% url 'question_update' %}" class="btn btn-primary" style="width:100%;">我要提问</a>
-						</div>
+						<span class="glyphicon glyphicon-chevron-down col-xs-2 col-xs-offset-5" style="color: #428bca; font-size: 30px;"></span>
+						<a href="{% url 'question_update' %}" class="btn btn-primary col-xs-2 col-xs-offset-10" style="width:100%;">我要提问</a>
 					</div>
 					<div class="tab-pane fade" id="picture">
 						<p>这里是美图</p>
