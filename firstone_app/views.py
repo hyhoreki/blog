@@ -97,5 +97,5 @@ def question_show(request, id):
 		
 def blog_index_question_show_more(request):
 	questions = serializers.serialize("json", Question.objects.all().order_by('?')[:5])
-	return JsonResponse(questions, safe=False)
+	return HttpResponse(questions, content_type='application/json')
 	
