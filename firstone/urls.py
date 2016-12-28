@@ -19,7 +19,6 @@ from firstone_app import views as firstone_app_views
 
 urlpatterns = [
     url(r'^index/', firstone_app_views.index, name='home'),
-    url(r'^add/(\d+)/(\d+)/', firstone_app_views.add, name='add'),
     url(r'^login/', firstone_app_views.login, name='login'),
     url(r'^signup/', firstone_app_views.signup, name='signup'),
     url(r'^logout/', firstone_app_views.logout, name='logout'),
