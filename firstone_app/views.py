@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import *
-import json
+from django.forms.models import model_to_dict
 
 def index(request):
 	return render(request, 'home.html')
@@ -97,5 +97,5 @@ def question_show(request, id):
 		
 def blog_index_question_show_more(request):
 	questions=Question.objects.all().order_by('?')[:5]
-	return JsonResponse(json.dumps(questions), safe=False)
+	return JsonResponse(model_to_dict(questions), safe=False)
 	
