@@ -14,9 +14,11 @@
 </head>
 
 <body>
-	<p>{{ quesiton.question_title }}</p>
-	<p>{{ quesiton.question_describe }}</p>
-	<p>{{ quesiton.question_text }}</p>
+	{% for question_one in question %}
+	<p>{{ question_one.question_title }}</p>
+	<p>{{ question_one.question_describe }}</p>
+	<p>{{ question_one.question_text }}</p>
+	{% endfor %}
 </body>
 
 </html>
