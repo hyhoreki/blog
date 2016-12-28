@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.http import JsonResponse
+from django.core import serializers
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import *
-from django.forms.models import model_to_dict
 
 def index(request):
 	return render(request, 'home.html')
@@ -96,6 +96,6 @@ def question_show(request, id):
 		return HttpResponseRedirect("/login/")
 		
 def blog_index_question_show_more(request):
-	questions=Question.objects.all().order_by('?')[:5]
-	return JsonResponse(model_to_dict(questions), safe=False)
+	questions = serializers.serialize("json", Question.objects.all().order_by('?')[:5])
+	return JsonResponse(questions, safe=False)
 	
