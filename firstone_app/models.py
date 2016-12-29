@@ -11,6 +11,7 @@ class Question(models.Model):
 		return self.question_title
 		
 class Answer(models.Model):
+	aid=models.IntegerField(primary_key=True)
 	answer_user_id=models.IntegerField()
 	answer_text=models.TextField()
 	answer_time=models.DateTimeField()
