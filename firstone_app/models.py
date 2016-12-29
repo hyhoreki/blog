@@ -1,6 +1,7 @@
 from django.db import models
 
 class Question(models.Model):
+	qid=models.AutoFeild(primary_key=True)
 	ask_user_id=models.IntegerField()
 	question_title=models.CharField(max_length=120)
 	question_describe=models.CharField(max_length=250)
