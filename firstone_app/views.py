@@ -90,7 +90,7 @@ def question_update(request):
 		
 def question_show(request, id):
 	if request.user is not None and request.user.is_active:
-		question=Question.objects.filter(id=id)
+		question=Question.objects.get(id=id)
 		question_title=question.question_title
 		question_aks_user=question.ask_user
 		question_text=question.question_text
