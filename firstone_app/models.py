@@ -1,20 +1,18 @@
 from django.db import models
 
-class Passage(models.Model):
-	title = models.CharField(max_length=100)
-	time = models.DateTimeField()
-	content = models.CharField(max_length=10000)
-	
-	def __str__(self):
-		return self.title
-	
 class Question(models.Model):
-	ask_user=models.IntegerField()
-	answer_user=models.IntegerField(null=True)
-	question_title=models.CharField(max_length=500)
-	question_describe=models.CharField(max_length=500)
-	question_text=models.CharField(max_length=3000)
-	question_answer_text=models.CharField(max_length=3000)
+	ask_user_id=models.IntegerField()
+	question_title=models.CharField(max_length=120)
+	question_describe=models.CharField(max_length=250)
+	question_text=models.TextField()
 	
 	def  __str__(self):
 		return self.question_title
+		
+class Answer(models.Model):
+	answer_user_id=models.IntegerField()
+	answer_text=models.TextField()
+	answer_time=models.DateTimeField()
+	
+	def __str__(self):
+		return self.answer_user_id
