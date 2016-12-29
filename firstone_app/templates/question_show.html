@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>问题详情</title>
+	<title>{{ question_title }}</title>
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 	<script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
@@ -16,16 +16,12 @@
 <body>
 
 	<div class="container">
+	{% include 'nav.html' %}
 		<div class="col-xs-10 col-xs-offset-1">
-			<div id="question_show" class="panel panel-primary">
+			<div class="panel panel-primary">
+					<div class="panel-title">{{ question_title }}</div>
+					<div class="panel-body">{{ question_text }}<div>
 			</div>
-			{% for question in question %}
-			<script>
-				$(document).ready(function(){
-					$('#question_show').append('<div class="panel-title">'+{{ question.question_title}}+'</div>'+'<div class="panel-body">'+{{ question.question_text }}+'</div>');
-				});
-			</script>
-			{% endfor %}
 		</div>
 	</div>
 
