@@ -96,7 +96,7 @@ def question_show(request, id):
 		question_text=question.question_text
 		ask_user=User.objects.get(id=question_aks_user_id)
 		ask_user_nickname=ask_user.first_name
-		return render(request, 'question_show.html', {'question_title':question_title, 'question_aks_user':question_aks_user, 'question_text':question_text, 'ask_user_nickname':ask_user_nickname})
+		return render(request, 'question_show.html', {'question_title':question_title, 'question_text':question_text, 'ask_user_nickname':ask_user_nickname})
 	else:
 		return HttpResponseRedirect("/login/")
 		
