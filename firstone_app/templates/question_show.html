@@ -17,10 +17,16 @@
 
 	<div class="container">
 	{% include 'nav.html' %}
+	<p style="width:10px;"></p>
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="panel panel-primary">
 					<div class="panel-heading">{{ question_title }}</div>
-					<div class="panel-body">{{ question_text }}<div>
+					<div id="question_text" class="well"></div>
+					<script>
+						$(document).ready(function(){
+							$('#question_text').summernote('code', {{ question_text }});
+						});
+					</script>
 			</div>
 		</div>
 	</div>
