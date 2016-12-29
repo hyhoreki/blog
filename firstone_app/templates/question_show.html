@@ -24,7 +24,7 @@
 					<script>
 						$(document).ready(function(){
 							var question_text = unescape('{{ question_text }}');
-							$('#question_show').append('<div>'+question_text+'</div>');
+							$('#question_show').html(question_text);
 						});
 					</script>
 			</div>
