@@ -21,13 +21,7 @@
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="panel panel-primary">
 					<div class="panel-heading">{{ question_title }}</div>
-					<div id="question_text" class="well"></div>
-					<script>
-						$(document).ready(function(){
-							var question_text = espace({{ question_text }})
-							$('#question_text').summernote('code', question_text);
-						});
-					</script>
+					<div id="question_text" class="well">{{ question_text }}</div>
 			</div>
 		</div>
 	</div>
