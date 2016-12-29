@@ -24,8 +24,7 @@
 					<div id="question_text" class="well"></div>
 					<script>
 						$(document).ready(function(){
-							var question_text = unescape({{ question_text }})
-							$('#question_text').summernote('code', question_text);
+							$('#question_text').summernote('code', {{ question_text }});
 						});
 					</script>
 			</div>
