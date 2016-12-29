@@ -25,7 +25,8 @@
 					<script>
 					<!--
 						$(document).ready(function(){
-							$('#question_text').summernote('code', {{ question_text }});
+							var a=unescape({{ question_text }})
+							$('#question_text').summernote('code', a);
 						});
 						-->
 					</script>
