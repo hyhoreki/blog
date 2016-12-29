@@ -5,7 +5,6 @@ from django.core import serializers
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import *
-import html
 
 def index(request):
 	return render(request, 'home.html')
@@ -93,9 +92,11 @@ def question_show(request, id):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(id=id)
 		question_title=question.question_title
-		question_aks_user=question.ask_user
-		question_text=html.unescape(question.question_text)
-		return render(request, 'question_show.html', {'question_title':question_title, 'question_aks_user':question_aks_user, 'question_text':question_text})
+		question_aks_user_id=question.ask_user
+		question_text=question.question_text
+		ask_user=User.objects.get(id=question_aks_user_id)
+		ask_user_nickname=ask_user.first_name
+		return render(request, 'question_show.html', {'question_title':question_title, 'question_aks_user':question_aks_user, 'question_text':question_text, 'ask_user_nickname':ask_user_nickname})
 	else:
 		return HttpResponseRedirect("/login/")
 		
