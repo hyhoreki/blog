@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.contrib import auth
 from django.contrib.auth.models import User
+import html
 from .models import *
 
 def index(request):
@@ -93,7 +94,7 @@ def question_show(request, id):
 		question=Question.objects.get(id=id)
 		question_title=question.question_title
 		question_aks_user=question.ask_user
-		question_text=question.question_text
+		question_text=html.unescape(question.question_text)
 		return render(request, 'question_show.html', {'question_title':question_title, 'question_aks_user':question_aks_user, 'question_text':question_text})
 	else:
 		return HttpResponseRedirect("/login/")
