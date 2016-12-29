@@ -19,13 +19,13 @@
 	{% include 'nav.html' %}
 	<p style="width:10px;"></p>
 		<div class="col-xs-10 col-xs-offset-1">
-			<div class="panel panel-primary">
+			<div  id="question_show" class="panel panel-primary">
 					<div class="panel-heading"></div>
 					<div id="question_text" class="well"></div>
 					<script>
 						$(document).ready(function(){
 							var question_text = unescape('{{ question_text }}');
-							$('#question_text').summernote('code', question_text);
+							$('#question_show').append(question_text);
 						});
 					</script>
 			</div>
