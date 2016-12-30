@@ -1,6 +1,7 @@
 from django.db import models
 
 class Question(models.Model):
+	qid=models.AutoField()
 	ask_user_id=models.IntegerField()
 	question_title=models.CharField(max_length=120)
 	question_describe=models.CharField(max_length=250)
@@ -10,6 +11,7 @@ class Question(models.Model):
 		return self.question_title
 		
 class Answer(models.Model):
+	aid=models.AutoField()
 	answer_user_id=models.IntegerField()
 	answer_text=models.TextField()
 	answer_time=models.DateTimeField()
