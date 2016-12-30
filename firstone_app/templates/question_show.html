@@ -24,6 +24,31 @@
 						<div class="panel-heading">{{ question_title }}</div>
 						<div class="panel-body">{{ question_text|safe }}</div>
 				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">用户回答</div>
+				</div>
+					<div id="question_answer" class="well"></div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">我来回答</div>
+				</div>
+				<form method="POST">
+				{% csrf_token %}
+					<div class="form-group" style="width:100%;">
+						<textarea id="summernote" name="answer_text" placeholder="问题详细内容"></textarea>
+						<script>
+							$(document).ready(function(){
+								$('#summernote').summernote({
+									lang: 'zh-CN',
+									height: 300,
+									focus: true,
+								});
+							});
+						</script>
+					</div>
+				</form>
+				<div class="col-xs-4 col-xs-offset-4">
+					<button type="submit" class="btn btn-primary" style="width:100%;">提交答案</button> 
+				</div>
 			</div>
 			<div class="col-xs-2">
 				<div class="panel panel-primary">
@@ -33,36 +58,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-10">
-				<div class="panel panel-primary">
-					<div class="panel-heading">用户回答</div>
-					<div id="question_answer" class="well"></div>
-					<div class="panel-heading">我来回答</div>
-					<form method="POST">
-					{% csrf_token %}
-						<div class="form-group" style="width:100%;">
-							<textarea id="summernote" name="answer_text" placeholder="问题详细内容"></textarea>
-							<script>
-								$(document).ready(function(){
-									$('#summernote').summernote({
-										lang: 'zh-CN',
-										height: 300,
-										focus: true,
-									});
-								});
-							</script>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-4 col-xs-offset-4">
-				<button type="submit" class="btn btn-primary" style="width:100%;">提交答案</button> 
-			</div>
-		</div>
 	</div>
+	
 </body>
 
 </html>
