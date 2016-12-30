@@ -88,11 +88,11 @@ def question_update(request):
 	else:
 		return HttpResponseRedirect("/login/")
 		
-def question_show(request, id):
+def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
-		question=Question.objects.get(id=id)
+		question=Question.objects.get(qid=qid)
 		question_title=question.question_title
-		question_aks_user_id=question.ask_user
+		question_aks_user_id=question.ask_user_id
 		question_text=question.question_text
 		ask_user=User.objects.get(id=question_aks_user_id)
 		ask_user_nickname=ask_user.first_name
