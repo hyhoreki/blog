@@ -13,6 +13,7 @@ class Question(models.Model):
 class Answer(models.Model):
 	aid=models.AutoField(primary_key=True)
 	answer_user_id=models.IntegerField()
+	answer_question_id=models.IntegerField()
 	answer_text=models.TextField()
 	answer_time=models.DateTimeField()
 	

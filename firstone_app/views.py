@@ -91,12 +91,10 @@ def question_update(request):
 def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(qid=qid)
-		question_title=question.question_title
-		question_aks_user_id=question.ask_user_id
-		question_text=question.question_text
-		ask_user=User.objects.get(id=question_aks_user_id)
-		ask_user_nickname=ask_user.first_name
-		return render(request, 'question_show.html', {'question_title':question_title, 'question_text':question_text, 'ask_user_nickname':ask_user_nickname})
+		ask_user=User.objects.get(id=question.question_aks_user_id)
+		answer=Answer.objects.get(aid=question.qid)
+		answer_user=User.objects.get(id=answer.answer_user_id)
+		return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name})
 	else:
 		return HttpResponseRedirect("/login/")
 		
