@@ -27,6 +27,6 @@ urlpatterns = [
 	url(r'^question_update/', firstone_app_views.question_update, name='question_update'),
 	url(r'^question/(\d+)/$', firstone_app_views.question_show, name='question_show'),
 	url(r'^blog_index_question_show_more/$', firstone_app_views.blog_index_question_show_more, name='blog_index_question_show_more'),
-	url(r'^question_show_answer_show_more/$', firstone_app_views.blog_index_question_show_more, name='question_show_answer_show_more'),
+	url(r'^question_show_answer_show_more/$', firstone_app_views.question_show_answer_show_more, name='question_show_answer_show_more'),
     url(r'^admin/', admin.site.urls),
 ]
