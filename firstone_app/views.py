@@ -106,5 +106,5 @@ def blog_index_question_show_more(request):
 	return HttpResponse(questions, content_type='application/json')
 	
 def question_show_answer_show_more(request):
-	answer=serializers.serialize("json", Answer.objects.all()order_by('?')[:3])
+	answer=serializers.serialize("json", Answer.objects.all().order_by('?')[:3])
 	return HttpResponse(answer, content_type='application/json')
