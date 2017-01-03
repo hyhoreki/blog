@@ -92,6 +92,11 @@ def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(qid=qid)
 		ask_user=User.objects.get(id=question.ask_user_id)
+		if request.method=="POST":
+			answer_user_id=request.user.id
+			answer_text=request.POST.get('answer_text', '')
+			Answer.objects.create(answer_user_id=answer_user_id, answer_question_id=qid, answer_text=answer_text)
+			return HttpResponseRedirect(request.path)
 		if Answer.objects.all():
 			answer= Answer.objects.get(aid=question.qid)
 			answer_user=User.objects.get(id=answer.answer_user_id)
