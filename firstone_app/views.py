@@ -100,7 +100,7 @@ def question_show(request, qid):
 		if Answer.objects.all():
 			answer= Answer.objects.get(aid=question.qid)
 			answer_user=User.objects.get(id=answer.answer_user_id)
-			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name})
+			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name})
 		else:
 			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':''})
 	else:
