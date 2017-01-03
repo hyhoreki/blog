@@ -39,15 +39,15 @@
 							<span id="question_show_more" class="glyphicon glyphicon-chevron-down col-xs-2 col-xs-offset-5" style="color: #428bca; font-size: 30px;"></span>
 						</div>
 						<script>
-						$(document).ready(function(){
-							$('#question_show_more').click(function(){
-								$.getJSON("{% url 'blog_index_question_show_more' %}",function(question){
-									for (var i = question.length - 1; i >= 0; i--){
-										$('#question_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/question/'+question[i].pk+'">'+question[i].fields.question_title+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">&nbsp &nbsp'+question[i].fields.question_describe+'</div></div>');
-									}
+							$(document).ready(function(){
+								$('#question_show_more').click(function(){
+									$.getJSON("{% url 'blog_index_question_show_more' %}",function(question){
+										for (var i = question.length - 1; i >= 0; i--){
+											$('#question_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/question/'+question[i].pk+'">'+question[i].fields.question_title+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">&nbsp &nbsp'+question[i].fields.question_describe+'</div></div>');
+										}
+									})
 								})
-							})
-						});
+							});
 						</script>
 						<div class="col-xs-2 col-xs-offset-3">
 							<a href="{% url 'question_update' %}" class="btn btn-primary" style="width:100%;">我要提问</a>
