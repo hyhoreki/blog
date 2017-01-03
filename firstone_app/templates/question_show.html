@@ -43,7 +43,7 @@
 							$('#answer_show_more').click(function(){
 								$.getJSON("{% url 'question_show_answer_show_more' %}",function(answer){
 									for (var i = answer.length - 1; i >= 0; i--){
-										$('#answer_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">'+question[i].answer_time+'&nbsp &nbsp'+answer[i].answer_user_nickname'</div></div>');
+										$('#answer_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">'+answer[i].answer_time+'&nbsp &nbsp'+answer[i].answer_user_nickname'</div></div>');
 									}
 								})
 							})
