@@ -32,13 +32,27 @@
 					<div id="answer_show_panel">
 						<div class="panel panel-default">
 							<div class="panel-body" style="color: #428bca;"><a href="/question/{{ question.qid }}">{{ answer_text }}</a></div>
-							<div class="panel-footer" style="background-color:#428bca;color:#fff;">{{ answer_time }}&nbsp &nbsp {{ answer_user_nickname }}</div>
+							<div class="panel-footer" style="background-color:#428bca;color:#fff;">{{ answer_time }}&nbsp &nbsp{{ answer_user_nickname }}</div>
 						</div>
+					</div>
+					<div class="col-xs-2 col-xs-offset-5">
+							<span id="answer_show_more" class="glyphicon glyphicon-chevron-down col-xs-2 col-xs-offset-5" style="color: #428bca; font-size: 30px;"></span>
 					</div>
 					{% else %}
 					<p>还没有回答哦</p>
 					{% endif %}
 				</div>
+				<script>
+					$(document).ready(function(){
+						$('#answer_show_more').click(function(){
+							$.getJSON("{% url 'question_show_answer_show_more' %}",function(answer){
+								for (var i = answer.length - 1; i >= 0; i--){
+									$('#answer_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">'+question[i].answer_time+'&nbsp &nbsp'+answer[i].answer_user_nickname'</div></div>');
+								}
+							})
+						})
+					});
+				</script>
 				<div class="panel panel-primary">
 					<div class="panel-heading">我来回答</div>
 				</div>
