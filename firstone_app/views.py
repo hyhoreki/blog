@@ -92,7 +92,7 @@ def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(qid=qid)
 		ask_user=User.objects.get(id=question.ask_user_id)
-		if Answer.objects.all != '':
+		if Answer.objects.all != None:
 			answer= Answer.objects.get(aid=question.qid)
 			answer_user=User.objects.get(id=answer.answer_user_id)
 			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name})
