@@ -19,4 +19,4 @@ class Answer(models.Model):
 	answer_time=models.DateTimeField(auto_now=True)
 	
 	def __str__(self):
-		return self.answer_user_id
+		return self.answer_text
