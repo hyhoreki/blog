@@ -98,7 +98,7 @@ def question_show(request, qid):
 			Answer.objects.create(answer_user_id=answer_user_id, answer_question_id=qid, answer_text=answer_text)
 			return HttpResponseRedirect(request.path)
 		if Answer.objects.all():
-			answer= Answer.objects.get(aid=question.qid)
+			answer= Answer.objects.get(answer_question_id=qid)
 			answer_user=User.objects.get(id=answer.answer_user_id)
 			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name})
 		else:
