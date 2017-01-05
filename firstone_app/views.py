@@ -113,3 +113,12 @@ def blog_index_question_show_more(request):
 def question_show_answer_show_more(request):
 	answer=serializers.serialize("json", Answer.objects.all().order_by('?')[:3])
 	return HttpResponse(answer, content_type='application/json')
+	
+def answer_show(request, aid):
+	if request.user is not None and request.user.is_active:
+		answer=Answer.objects.get(aid=aid)
+		question=Question.objects.get(qid=answer.answer_question_id)
+		answer_user=User.objects.get(id=answer.answer_user_id)
+		return render(request, 'answer_show.html', {'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text})
+	else:
+		return HttpResponseRedirect("/login/")
