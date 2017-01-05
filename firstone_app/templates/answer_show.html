@@ -19,10 +19,7 @@
 	{% include 'nav.html' %}
 		<div class="row">
 			<div class="panel panel-primary col-xs-12">
-				<div class="panel-heading">
-					<div class="col-xs-10">{{ answer_user_nickname }}的回答</div>
-					<div class="col-xs-2">头像</div>
-				</div>
+				<div class="panel-heading" style="text-align:left">{{ answer_user_nickname }}的回答</div>
 				<div class="panel-body">{{ answer_text|safe }}</div>
 			</div>
 		</div>
