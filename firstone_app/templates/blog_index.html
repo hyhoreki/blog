@@ -16,14 +16,14 @@
 		<div class="row">
 			<div class="col-xs-2" style="padding-left:0px;padding-right:0px;">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#passage" data-toggle="tab" style="text-align:center;">精选文章</a></li>
-					<li><a href="#question" data-toggle="tab" style="text-align:center;">每日提问</a></li>
-					<li><a href="#picture" data-toggle="tab" style="text-align:center;">优质美图</a></li>
+					<li id="passage_icon"><a href="#passage" data-toggle="tab" style="text-align:center;">精选文章</a></li>
+					<li id="question_icon"><a href="#question" data-toggle="tab" style="text-align:center;">每日提问</a></li>
+					<li id="picture_icon"><a href="#picture" data-toggle="tab" style="text-align:center;">优质美图</a></li>
 				</ul>
 			</div>
 			<div class="col-xs-10">
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="passage">
+					<div class="tab-pane fade" id="passage">
 						<p>这里是文章</p>
 					</div>
 					<div class="tab-pane fade" id="question">
@@ -40,6 +40,7 @@
 						</div>
 						<script>
 							$(document).ready(function(){
+								$('#question_icon').attr("class", "active");
 								$('#question').attr("class", "tab-pane fade in active");
 								$('#question_show_more').click(function(){
 									$.getJSON("{% url 'blog_index_question_show_more' %}",function(question){
