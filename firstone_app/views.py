@@ -100,9 +100,9 @@ def question_show(request, qid):
 		if Answer.objects.filter(answer_question_id=qid):
 			answer= Answer.objects.filter(answer_question_id=qid).order_by('?')[0]
 			answer_user=User.objects.get(id=answer.answer_user_id)
-			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid})
+			return render(request, 'question_show.html', {'qid'=qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid})
 		else:
-			return render(request, 'question_show.html', {'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':''})
+			return render(request, 'question_show.html', {'qid'=qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':''})
 	else:
 		return HttpResponseRedirect("/login/")
 		
@@ -110,8 +110,8 @@ def blog_index_question_show_more(request):
 	questions = serializers.serialize("json", Question.objects.all().order_by('?')[:5])
 	return HttpResponse(questions, content_type='application/json')
 	
-def question_show_answer_show_more(request):
-	answer=serializers.serialize("json", Answer.objects.all().order_by('?')[:3])
+def question_show_answer_show_more(request, qid):
+	answer=serializers.serialize("json", Answer.objects.filter(answer_question_id=qid).order_by('?')[:3])
 	return HttpResponse(answer, content_type='application/json')
 	
 def answer_show(request, aid):
