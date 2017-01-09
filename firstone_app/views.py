@@ -92,6 +92,10 @@ def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(qid=qid)
 		ask_user=User.objects.get(id=question.ask_user_id)
+		if attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id):
+			attention = 1
+		else:
+			attention = 0
 		if request.method=="POST":
 			answer_user_id=request.user.id
 			answer_text=request.POST.get('answer_text', '')
@@ -100,9 +104,9 @@ def question_show(request, qid):
 		if Answer.objects.filter(answer_question_id=qid):
 			answer= Answer.objects.filter(answer_question_id=qid).order_by('?')[0]
 			answer_user=User.objects.get(id=answer.answer_user_id)
-			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid})
+			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid, 'attention':attention})
 		else:
-			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':''})
+			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':'', 'attention':attention})
 	else:
 		return HttpResponseRedirect("/login/")
 		
@@ -123,8 +127,11 @@ def answer_show(request, aid):
 	else:
 		return HttpResponseRedirect("/login/")
 		
-def attention_question(request, qid):
+def attention_question(request, qid, action):
 	if request.user is not None and request.user.is_active:
-		Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
+		if action == 0:
+			Attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id).delete()
+		elif action == 1:
+			Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
 		url="/question/"+qid
 		return HttpResponseRedirect(url)
