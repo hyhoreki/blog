@@ -126,5 +126,5 @@ def answer_show(request, aid):
 def attention_question(request, qid):
 	if request.user is not None and request.user.is_active:
 		Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
-		url="/question/"+qid+"/"
+		url="/question/"+qid
 		return HttpResponseRedirect(url)
