@@ -83,11 +83,21 @@
 					<div class="panel-footer" style="text-align:center;">{{ ask_user_nickname }}</div>
 				</div>
 				{% if attention == 0 %}
-				<div><a href="/attention_question/{{ qid }}/1/" class="btn btn-warning" style="width:100%;">关注此问题</a></div>
+				<div><button id="attention_question" class="btn btn-warning" style="width:100%;">关注此问题</a></div>
 				{% elif attention == 1 %}
-				<div><a href="/attention_question/{{ qid }}/0/" class="btn btn-danger" style="width:100%;">取消关注</a></div>
+				<div><button id="cancel_attention_question" class="btn btn-danger" style="width:100%;">取消关注</a></div>
 				{% endif %}
 				<div><a href="{% url 'blog_index' 2 %}" class="btn btn-success" style="width:100%;">更多问题</a></div>
+				<script>
+					$(document).ready(function(){
+						$('#attention_question').click(function(){
+							var qid={{ qid }}
+							$getJSON("{% url 'attention_question' qid 1 %}",function(attention){
+								
+							})
+						})
+					});
+				</script>
 			</div>
 		</div>
 	</div>
