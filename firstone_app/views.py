@@ -5,6 +5,7 @@ from django.core import serializers
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import *
+import json
 
 def index(request):
 	return render(request, 'home.html')
@@ -135,5 +136,5 @@ def attention_question(request, qid, action):
 		elif action == '1':
 			Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
 			attention_dict={'state':'1'}
-		attention_dict_json=serializers.serialize("json", attention_dict)
+		attention_dict_json=json.dumps(attention_dict)
 		return HttpResponse(attention_dict_json, content_type='application/json')
