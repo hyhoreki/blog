@@ -38,7 +38,8 @@
 					<script>
 						$(document).ready(function(){
 							$('#answer_show_more').click(function(){
-								$.getJSON("{% url /question_show_answer_show_more/{{ qid }} %}",function(answer){
+								var qid={{ qid }};
+								$.getJSON("{% url 'question_show_answer_show_more' qid %}",function(answer){
 									for (var i = answer.length - 1; i >= 0; i--){
 										var time=answer[i].fields.answer_time.split('.')[0];
 										time=time.replace('T', ' ');
