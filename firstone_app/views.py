@@ -135,5 +135,5 @@ def attention_question(request, qid, action):
 		elif action == '1':
 			Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
 			attention_dict={'state':'1'}
-		attention_dict=serializers.serialize("json", attention_dict)
-		return HttpResponse(attention_dict, content_type='application/json')
+		attention_dict_json=serializers.serialize("json", attention_dict)
+		return HttpResponse(attention_dict_json, content_type='application/json')
