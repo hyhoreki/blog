@@ -40,8 +40,17 @@
 						</div>
 						<script>
 							$(document).ready(function(){
-								$('#question_icon').attr("class", "active");
-								$('#question').attr("class", "tab-pane fade in active");
+								var select_id={{ select_id }};
+								if (select_id == '1'){
+									$('#passage_icon').attr("class", "active");
+									$('#passage').attr("class", "tab-pane fade in active");
+								}else if(select_id == '2'){
+									$('#question_icon').attr("class", "active");
+									$('#question').attr("class", "tab-pane fade in active");
+								}else if(select_id == '3'){
+									$('#picture_icon').attr("class", "active");
+									$('#picture').attr("class", "tab-pane fade in active");
+								}
 								$('#question_show_more').click(function(){
 									$.getJSON("{% url 'blog_index_question_show_more' %}",function(question){
 										for (var i = question.length - 1; i >= 0; i--){
