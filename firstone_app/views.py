@@ -92,7 +92,7 @@ def question_show(request, qid):
 	if request.user is not None and request.user.is_active:
 		question=Question.objects.get(qid=qid)
 		ask_user=User.objects.get(id=question.ask_user_id)
-		if attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id):
+		if Attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id):
 			attention = 1
 		else:
 			attention = 0
