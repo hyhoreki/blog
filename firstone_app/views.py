@@ -122,3 +122,9 @@ def answer_show(request, aid):
 		return render(request, 'answer_show.html', {'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text})
 	else:
 		return HttpResponseRedirect("/login/")
+		
+def attention_question(request, qid):
+	if request.user is not None and request.user.is_active:
+		Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
+		url="/question/"+qid+"/"
+		return HttpResponseRedirect(url)

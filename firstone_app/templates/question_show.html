@@ -24,7 +24,7 @@
 						<div class="panel-body">{{ question_text|safe }}</div>
 				</div>
 				<div class="panel panel-primary">
-					<div class="panel-heading">用户回答</div>
+					<div class="panel-heading">圈子内回答</div>
 				</div>
 				<div id="question_answer" class="well">
 					{% if answer_user_nickname %}
@@ -82,6 +82,7 @@
 					<div class="panel-body">此处应该有头像</div>
 					<div class="panel-footer" style="text-align:center;">{{ ask_user_nickname }}</div>
 				</div>
+				<div><a href="{% url 'attention_question' {{ qid }} %}" class="btn btn-warning" style="width:100%;">关注此问题</a></div>
 				<div><a href="{% url 'blog_index' 2 %}" class="btn btn-success" style="width:100%;">更多问题</a></div>
 			</div>
 		</div>
