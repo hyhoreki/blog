@@ -18,15 +18,15 @@ from django.contrib import admin
 from firstone_app import views as firstone_app_views
 
 urlpatterns = [
-    url(r'^index/', firstone_app_views.index, name='home'),
+    url(r'^welcome/', firstone_app_views.index, name='welcome'),
     url(r'^login/', firstone_app_views.login, name='login'),
     url(r'^signup/', firstone_app_views.signup, name='signup'),
     url(r'^logout/', firstone_app_views.logout, name='logout'),
     url(r'^userpage/', firstone_app_views.userpage, name='userpage'),
-    url(r'^blog_index/(\d+)/$', firstone_app_views.blog_index, name='blog_index'),
+    url(r'^index/(\d+)/$', firstone_app_views.blog_index, name='index'),
 	url(r'^question_update/', firstone_app_views.question_update, name='question_update'),
 	url(r'^question/(\d+)/$', firstone_app_views.question_show, name='question_show'),
-	url(r'^blog_index_question_show_more/$', firstone_app_views.blog_index_question_show_more, name='blog_index_question_show_more'),
+	url(r'^question_show_more/$', firstone_app_views.blog_index_question_show_more, name='question_show_more'),
 	url(r'^question_show_answer_show_more/(\d+)/$', firstone_app_views.question_show_answer_show_more, name='question_show_answer_show_more'),
 	url(r'^answer/(\d+)/$', firstone_app_views.answer_show, name='answer_show'),
 	url(r'^attention_question/(\d+)/(\d+)/$', firstone_app_views.attention_question, name='attention_question'),

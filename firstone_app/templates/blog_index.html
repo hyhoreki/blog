@@ -52,7 +52,7 @@
 									$('#picture').attr("class", "tab-pane fade in active");
 								}
 								$('#question_show_more').click(function(){
-									$.getJSON("{% url 'blog_index_question_show_more' %}",function(question){
+									$.getJSON("{% url 'question_show_more' %}",function(question){
 										for (var i = question.length - 1; i >= 0; i--){
 											$('#question_show_panel').append('<div class="panel panel-default"><div class="panel-body" style="color: #428bca;"><a href="/question/'+question[i].pk+'">'+question[i].fields.question_title+'</a></div><div class="panel-footer" style="background-color:#428bca;color:#fff;">&nbsp &nbsp'+question[i].fields.question_describe+'</div></div>');
 										}
