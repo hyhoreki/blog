@@ -99,10 +99,10 @@
 							$getJSON("{% url 'attention_question' qid 1 %}",function(attention){
 								if (attention.state == '1'){
 									$('#attention').attr('class', 'btn btn-danger');
-									$('#attention').val('取消关注');
+									$('#attention').text('取消关注');
 								}else if (attention.state == '0'){
 									$('#attention').attr('class', 'btn btn-warning');
-									$('#attention').val('关注问题');
+									$('#attention').text('关注问题');
 								}
 							})
 						})
