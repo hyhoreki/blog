@@ -86,17 +86,20 @@
 				<div><a href="{% url 'blog_index' 2 %}" class="btn btn-success" style="width:100%;">更多问题</a></div>
 				<script>
 					$(document).ready(function(){
-						var attention_state={{ attention }}
+						var attention_state={{ attention }};
+						var action='0';
 						if (attention_state == '0'){
 							$('#attention').attr('class', 'btn btn-warning');
 							$('#attention').html('关注问题');
+							action = '1';
 						}else if(attention_state == '1'){
 							$('#attention').attr('class', 'btn btn-danger');
-							$('#attention').html('取消关注');
+							$('#attention').html('取消关注');\
+							action = '0';
 						}
 						$('#attention').click(function(){
 							var qid={{ qid }}
-							$.getJSON("{% url 'attention_question' qid 1 %}",function(attention){
+							$.getJSON("{% url 'attention_question' qid action %}",function(attention){
 								if (attention.state == '1'){
 									$('#attention').attr('class', 'btn btn-danger');
 									$('#attention').html('取消关注');
