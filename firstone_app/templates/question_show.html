@@ -93,7 +93,7 @@
 							action = '1';
 						}else if(attention_state == '1'){
 							$('#attention').attr('class', 'btn btn-danger');
-							$('#attention').html('取消关注');\
+							$('#attention').html('取消关注');
 						}
 						$('#attention').click(function(){
 							$.getJSON("{% url 'attention_question' qid attention %}",function(attention){
