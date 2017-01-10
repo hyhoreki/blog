@@ -96,9 +96,7 @@
 							$('#attention').html('取消关注');\
 						}
 						$('#attention').click(function(){
-							var action={{ attention }};
-							var qid={{ qid }};
-							$.getJSON("{% url 'attention_question' qid action %}",function(attention){
+							$.getJSON("{% url 'attention_question' qid attention %}",function(attention){
 								if (attention.state == '1'){
 									$('#attention').attr('class', 'btn btn-danger');
 									$('#attention').html('取消关注');
