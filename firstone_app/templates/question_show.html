@@ -89,20 +89,20 @@
 						var attention_state={{ attention }}
 						if (attention_state == '0'){
 							$('#attention').attr('class', 'btn btn-warning');
-							$('#attention').val('关注问题');
+							$('#attention').html('关注问题');
 						}else if(attention_state == '1'){
 							$('#attention').attr('class', 'btn btn-danger');
-							$('#attention').val('取消关注');
+							$('#attention').html('取消关注');
 						}
 						$('#attention').click(function(){
 							var qid={{ qid }}
 							$getJSON("{% url 'attention_question' qid 1 %}",function(attention){
 								if (attention.state == '1'){
 									$('#attention').attr('class', 'btn btn-danger');
-									$('#attention').text('取消关注');
+									$('#attention').html('取消关注');
 								}else if (attention.state == '0'){
 									$('#attention').attr('class', 'btn btn-warning');
-									$('#attention').text('关注问题');
+									$('#attention').html('关注问题');
 								}
 							})
 						})
