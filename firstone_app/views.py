@@ -130,10 +130,10 @@ def answer_show(request, aid):
 		
 def attention_question(request, qid, action):
 	if request.user is not None and request.user.is_active:
-		if action == '0':
+		if action == '1':
 			Attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id).delete()
 			attention_dict={'state':'0'}
-		elif action == '1':
+		elif action == '0':
 			Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
 			attention_dict={'state':'1'}
 		attention_dict_json=json.dumps(attention_dict)
