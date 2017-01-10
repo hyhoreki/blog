@@ -98,7 +98,7 @@
 							action = '0';
 						}
 						$('#attention').click(function(){
-							$.getJSON("/attention/"+qid+"/"+action+"/",function(attention){
+							$.getJSON("/attention_question/"+qid+"/"+action+"/",function(attention){
 								if (attention.state == '1'){
 									$('#attention').attr('class', 'btn btn-danger');
 									$('#attention').html('取消关注');
