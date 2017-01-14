@@ -85,6 +85,8 @@ def question_update(request):
 			question_describe=request.POST.get('question_describe', '')
 			question_text=request.POST.get('question_text', '')
 			Question.objects.create(ask_user_id=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
+			question=Question.objects.filter(ask_user_id=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
+			HttpResponseRedirect('/question/' + question.qid + '/')
 		return render(request, 'question_update.html')
 	else:
 		return HttpResponseRedirect("/login/")
