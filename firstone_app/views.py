@@ -85,7 +85,7 @@ def question_update(request):
 			question_describe=request.POST.get('question_describe', '')
 			question_text=request.POST.get('question_text', '')
 			Question.objects.create(ask_user_id=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
-			question=Question.objects.filter(ask_user_id=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
+			question=Question.objects.get(ask_user_id=user_id, question_title=question_title, question_describe=question_describe, question_text=question_text)
 			HttpResponseRedirect('/question/' + question.qid + '/')
 		return render(request, 'question_update.html')
 	else:
@@ -105,7 +105,7 @@ def question_show(request, qid):
 			Answer.objects.create(answer_user_id=answer_user_id, answer_question_id=qid, answer_text=answer_text)
 			return HttpResponseRedirect(request.path)
 		if Answer.objects.filter(answer_question_id=qid):
-			answer= Answer.objects.filter(answer_question_id=qid).order_by('?')[0]
+			answer=Answer.objects.filter(answer_question_id=qid).order_by('?')[0]
 			answer_user=User.objects.get(id=answer.answer_user_id)
 			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid, 'attention':attention})
 		else:
