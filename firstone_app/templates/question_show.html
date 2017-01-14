@@ -44,7 +44,7 @@
 										var time=answer[i].fields.answer_time.split('.')[0];
 										time=time.replace('T', ' ');
 										time=time.split('-')[0] + '年' + time.split('-')[1] + '月' + time.split('-')[2].split(' ')[0] + '日 ' + time.split('-')[2].split(' ')[1];
-										$('#answer_show_panel').append('<div id="'+answer[i].pk+'" class="panel panel-default"><div class="panel-body"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text+'</a></div><div class="panel-footer" style="color:#000000;text-align:right;">{% if request.id == '+answer[i].answer_user_id+' %}<a href="/answer_delete/'+answer[i].pk+'">删除</a>{% endif %}'+time+'</div></div>');
+										$('#answer_show_panel').append('<div id="'+answer[i].pk+'" class="panel panel-default"><div class="panel-body"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text+'</a></div><div class="panel-footer" style="color:#000000;text-align:right;">{% if request.user.id == '+answer[i].answer_user_id+' %}<a href="/answer_delete/'+answer[i].pk+'">删除</a>{% endif %}'+time+'</div></div>');
 									}
 								})
 							})
