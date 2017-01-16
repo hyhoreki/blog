@@ -30,5 +30,6 @@ urlpatterns = [
 	url(r'^question_show_answer_show_more/(\d+)/$', firstone_app_views.question_show_answer_show_more, name='question_show_answer_show_more'),
 	url(r'^answer/(\d+)/$', firstone_app_views.answer_show, name='answer_show'),
 	url(r'^attention_question/(\d+)/(\d+)/$', firstone_app_views.attention_question, name='attention_question'),
+    url(r'^answer_delete/(\d+)/$', firstone_app_views.answer_delete, name='answer_delete'),
     url(r'^admin/', admin.site.urls),
 ]
