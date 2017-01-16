@@ -22,7 +22,7 @@ class Answer(models.Model):
 	answer_question_id=models.IntegerField()
 	answer_text=models.TextField()
 	answer_time=models.DateTimeField(auto_now=True)
-	answer_agree=models.IntegerField()
+	answer_agree=models.IntegerField(default=0)
 	
 	def __str__(self):
 		return self.answer_text
