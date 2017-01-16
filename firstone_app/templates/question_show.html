@@ -40,6 +40,7 @@
 							$('#answer_show_more').click(function(){
 								var qid={{ qid }};
 								$.getJSON("{% url 'question_show_answer_show_more' qid %}",function(answer){
+									console.log(answer);
 									for (var i = answer.length - 1; i >= 0; i--){
 										var time=answer[i].fields.answer_time.split('.')[0];
 										var 
