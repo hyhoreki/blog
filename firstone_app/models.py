@@ -26,3 +26,9 @@ class Answer(models.Model):
 	
 	def __str__(self):
 		return self.answer_text
+
+class Friend(models.Model):
+	fid=models.AutoField(primary_key=True)
+	friend_one=models.IntegerField(default=0)
+	friend_two=models.IntegerField(default=0)
+	friendship_status=models.IntegerField(default=0)
