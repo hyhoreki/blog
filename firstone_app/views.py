@@ -148,6 +148,6 @@ def answer_delete(request,aid):
 	if request.user is not None and request.user.is_active:
 		qid=Answer.objects.get(aid=aid).answer_question_id
 		Answer.objects.get(aid=aid).delete()
-		return HttpResponseRedirect('/question/'+qid+'/')
+		return HttpResponseRedirect('/question/'+str(qid)+'/')
 	else:
 		return HttpResponseRedirect('/login/')
