@@ -49,7 +49,11 @@
 										if (answer[i].fields.answer_user_id == {{ request.user.id }}) {
 											opt_delete = '<a href="/answer_delete/'+answer[i].pk+'" style="color:#000000;">删除</a>';
 										}
-										$('#answer_show_panel').append('<div id="'+answer[i].pk+'" class="panel panel-default"><div class="panel-body"><a href="/answer/'+answer[i].pk+'">'+answer[i].fields.answer_text.substring(0,30)+'...</a></div><div class="panel-footer" style="color:#000000;text-align:right;">'+opt_delete+'&nbsp&nbsp'+time+'</div></div>');
+										var answer_text=answer[i].fields.answer_text;
+										if (answer_text.length > 30) {
+											answer_text=answer_text.substring(0,30);
+										}
+										$('#answer_show_panel').append('<div id="'+answer[i].pk+'" class="panel panel-default"><div class="panel-body"><a href="/answer/'+answer[i].pk+'">'+answer_text+'...</a></div><div class="panel-footer" style="color:#000000;text-align:right;">'+opt_delete+'&nbsp&nbsp'+time+'</div></div>');
 									}
 								})
 							})
