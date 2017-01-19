@@ -18,6 +18,8 @@ def login(request):
 		if user is not None and user.is_active:
 			auth.login(request, user)
 			return HttpResponseRedirect("/userpage/")
+		else:
+			return render(request, 'login.html', {'error': '1', 'error_message': '用户名密码错误'})
 	return render(request, 'login.html')
 	
 def signup(request):

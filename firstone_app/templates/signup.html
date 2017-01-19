@@ -7,6 +7,47 @@
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 	<script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
+	<script>
+		function check(){
+			var password=$('#password').val();
+			var password2=$('#password2').val();
+			var email=$('#email').val();
+			var email_reg = new RegExp("/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/");
+			if (password == ''){
+				$('#signup_status').html('密码不能为空');
+				$('#signup_modal').modal('show');
+				return false;
+			}
+			else if (password != password2){
+				$('#signup_status').html('两次输入密码不一致');
+				$('#signup_modal').modal('show');
+				return false;
+			}
+			else if (!email_reg.test(email)){
+				$('#signup_status').html('请输入正确的邮箱');
+				$('#signup_modal').modal('show');
+				return false;
+			}
+			else{
+				if (password.length < 6){
+					$('#signup_status').html('密码最好大于6位');
+					$('#signup_modal').modal('show');
+					return false;
+				}
+				else{
+					var password_reg = new RegExp("/^[0-9a-zA-Z]+$/");
+					if (!password_reg.test(password)){
+						$('#signup_status').html('密码只能由数字和字母组成');
+						$('#signup_modal').modal('show');
+						return false;
+					}
+					else{
+						$('#signup_form').submit();
+					}
+				}
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -19,23 +60,41 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<p style="height: 10px"></p>
+		<div class="row">
+			{% if error	%}
+			<div class="alert alert-danger col-xs-4 col-xs-offset-4" style="text-align: center;">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+				<strong>{{ error_message }}</strong>
+			</div>
+			{% endif %}
+			<div id="signup_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div id="signup_status" class="modal-body" style="text-align: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-xs-4 col-xs-offset-4">
-				<form method="POST">
+				<form id="signup_form" method="POST">
 					{% csrf_token %}
-					{% if error %}
-					<div class="well" style="color:#F00;text-align:center;">{{ error_message }}</div>
-					{% endif %}
 					<div class="input-group" style="width:100%;">
-						<input name="username" type="text" class="form-control" value="{{ username }}" placeholder="用户名">
+						<input id="username" name="username" type="text" class="form-control" value="{{ username }}" placeholder="用户名">
 					</div>
 					<div class="input-group" style="width:100%;">
-						<input name="password" type="password" class="form-control" value="{{ password }}" placeholder="密码">
+						<input id="password" name="password" type="password" class="form-control" value="{{ password }}" placeholder="密码">
 					</div>
 					<div class="input-group" style="width:100%;">
-						<input name="email" type="text" class="form-control" value="{{ email }}" placeholder="邮箱">
+						<input id="password2" name="password2" type="password" class="form-control" value="{{ password }}" placeholder="确认密码">
+					</div>
+					<div class="input-group" style="width:100%;">
+						<input id="email" name="email" type="text" class="form-control" value="{{ email }}" placeholder="邮箱">
 					</div>
 					<div class="form-group" style="padding-top:20px;width:100%;">
-						<button type="submit" class="btn btn-primary" style="width:100%;">注册</button>
+						<button id="signup" type="button" class="btn btn-primary" style="width:100%;" onclick="check()">注册</button>
 					</div>
 					<div>
 						<a href="{% url 'login' %}" class="btn btn-warning" style="width:100%;">已有账号？</a>
