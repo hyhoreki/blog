@@ -9,14 +9,20 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script>
 		function check(){
+			var username=$('#username').val();
 			var password=$('#password').val();
 			var password2=$('#password2').val();
 			var email=$('#email').val();
-			var email_reg = new RegExp("/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/");
-			if (password == ''){
-				$('#signup_status').html('密码不能为空');
+			var email_reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+			if (username == ''){
+				$('#signup_status').html('用户名不能为空');
 				$('#signup_modal').modal('show');
 				return false;
+			}
+			else if (password == ''){
+				$('#signup_status').html('密码不能为空');
+				$('#signup_modal').modal('show');
+				return false;	
 			}
 			else if (password != password2){
 				$('#signup_status').html('两次输入密码不一致');
@@ -35,7 +41,7 @@
 					return false;
 				}
 				else{
-					var password_reg = new RegExp("/^[0-9a-zA-Z]+$/");
+					var password_reg = new RegExp("^[0-9a-zA-Z]+$");
 					if (!password_reg.test(password)){
 						$('#signup_status').html('密码只能由数字和字母组成');
 						$('#signup_modal').modal('show');
