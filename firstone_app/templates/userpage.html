@@ -12,13 +12,54 @@
 			var password_old=$('#password_old').val();
 			var password_new1=$('#password_new1').val();
 			var password_new2=$('#password_new2').val();
-			if (password_new2!=password_new1){
-				$('#error_info').html('两次输入密码不一致');
-				$('#error_modal').modal('show');
-				return false;
-			}else{
-				$('#change_form').submit();
+			var nickname=$('#nickname').val();
+			var nickname_reg = new RegExp("^[0-9a-zA-Z\u4e00-\u9fa5]+$");
+			var password_reg = new RegExp("^[0-9a-zA-Z]+$");
+			if (password_old == '' && password_old == password_new1){
+				if (!nickname_reg.test(nickname)){
+					$('#error_info').html('用户名只能使用中文、英文和数字');
+					$('#error_modal').modal('show');
+					return false;
 				}
+				else{
+					$('#change_form').submit();
+				}
+			}
+			else{
+				if (password_old == ''){
+					$('#error_info').html('旧密码不能为空');
+					$('#error_modal').modal('show');
+					return false;
+				}
+				else if (password_new1 == ''){
+					$('#error_info').html('新密码不能为空');
+					$('#error_modal').modal('show');
+					return false;
+				}
+				else if (password_new2!=password_new1){
+					$('#error_info').html('两次输入密码不一致');
+					$('#error_modal').modal('show');
+					return false;
+				}
+				else if (password_new1.length < 6){
+					$('#error_info').html('新密码最好大于6位');
+					$('#error_modal').modal('show');
+					return false;	
+				}
+				else if (!password_reg.test(password_new1)){
+					$('#error_info').html('密码只能由数字和字母组成');
+					$('#error_modal').modal('show');
+					return false;		
+				}
+				else if (!nickname_reg.test(nickname)){
+					$('#error_info').html('用户名只能使用中文、英文和数字');
+					$('#error_modal').modal('show');
+					return false;
+				}
+				else{
+					$('#change_form').submit();
+				}
+			}
 		}
 		function reset_input(){
 			$('#password_old').val('');
