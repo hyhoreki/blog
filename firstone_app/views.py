@@ -129,7 +129,7 @@ def answer_show(request, aid):
 		answer=Answer.objects.get(aid=aid)
 		question=Question.objects.get(qid=answer.answer_question_id)
 		answer_user=User.objects.get(id=answer.answer_user_id)
-		return render(request, 'answer_show.html', {'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text})
+		return render(request, 'answer_show.html', {'aid':aid, 'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text})
 	else:
 		return HttpResponseRedirect("/login/")
 		

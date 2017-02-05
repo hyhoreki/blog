@@ -17,7 +17,7 @@
 			var password_reg = new RegExp("^[0-9a-zA-Z]+$");
 			if (password_old == '' && password_old == password_new1){
 				if (!nickname_reg.test(nickname)){
-					$('#error_info').html('用户名只能使用中文、英文和数字');
+					$('#error_info').html('昵称只能使用中文、英文和数字');
 					$('#error_modal').modal('show');
 					return false;
 				}

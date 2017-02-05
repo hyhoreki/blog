@@ -11,12 +11,36 @@
 	<link href="/static/css/summernote.css" rel="stylesheet">
 	<script src="/static/js/summernote.js"></script>
 	<script src="/static/js/summernote-zh-CN.js"></script>
+	<script type="text/javascript">
+		function check(){
+			var question_title=$('#question_title').val();
+			var question_describe=$('#question_describe').val();
+			var question_text=$('#summernote').val();
+			if (question_title == ''){
+				$('#question_update_status').html('问题标题不能为空');
+				$('#question_update_modal').modal('show');
+				return false;
+			}
+			else{
+				$('#question_update_form').submit();
+			}
+		}
+	</script>
 </head>
 
 <body>
 	<div class="container">
 		{% include 'nav.html' %}
 		<p style="width:10px;"></p>
+		<div class="row">
+			<div id="question_update_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div id="question_update_status" class="modal-body" style="text-align: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-1">
 				<a href="{% url 'index' 2 %}" class="glyphicon glyphicon-chevron-left" style="color: #21EBC2; font-size: 20px;"></a>
@@ -25,14 +49,14 @@
 				<div class="well well-lg">
 					<p>您可以在这里输入您的问题标题，问题描述和问题详细内容，完成问题的撰写。提交后您的问题将会随机分发给其他用户，他们的回答将会详细的展示给您。</p>
 				</div>
-				<form method="POST">
+				<form id="question_update_form" method="POST">
 					{% csrf_token %}
 					<div class="input-group" style="width:100%;">
-						<input name="question_title" type="text" class="form-control" placeholder="问题标题">
+						<input id="question_title" name="question_title" type="text" class="form-control" placeholder="问题标题（不超过30字）">
 					</div>
 					<p style="width:10px;"></p>
 					<div class="input-group" style="width:100%;">
-						<input name="question_describe" type="text" class="form-control" placeholder="问题描述">
+						<input id="question_describe" name="question_describe" type="text" class="form-control" placeholder="问题描述（不超过100字）">
 					</div>
 					<p style="width:10px;"></p>
 					<div class="form-group" style="width:100%;">
@@ -49,7 +73,7 @@
 					</div>
 					<p style="width:10px;"></p>
 					<div class="form-group col-xs-4 col-xs-offset-4">
-						<button type="submit" class="btn btn-primary" style="width:100%;">我要发问</button>
+						<button type="button" class="btn btn-primary" style="width:100%;" onclick="check()">我要发问</button>
 					</div>
 				</form>
 			</div>

@@ -11,12 +11,34 @@
 	<link href="/static/css/summernote.css" rel="stylesheet">
 	<script src="/static/js/summernote.js"></script>
 	<script src="/static/js/summernote-zh-CN.js"></script>
+	<script type="text/javascript">
+		function check(){
+			var answer_text=$('#answer_text').val();
+			if (answer_text == ''){
+				$('#answer_update_status').html('答案不能为空');
+				$('#answer_update_modal').modal('show');
+				return false;
+			}
+			else{
+				$('#answer_update_form').submit();
+			}
+		}
+	</script>
 </head>
 
 <body>
 
 	<div class="container">
 	{% include 'nav.html' %}
+		<div class="row">
+			<div id="answer_update_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div id="answer_update_status" class="modal-body" style="text-align: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-10">
 				<div  id="question_show" class="panel panel-primary">
@@ -66,13 +88,13 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">我来回答</div>
 				</div>
-				<form method="POST">
+				<form id="answer_update_form" method="POST">
 				{% csrf_token %}
 					<div class="form-group" style="width:100%;">
-						<textarea id="summernote" name="answer_text" placeholder="问题详细内容"></textarea>
+						<textarea id="answer_text" name="answer_text" placeholder="问题详细内容"></textarea>
 						<script>
 							$(document).ready(function(){
-								$('#summernote').summernote({
+								$('#answer_text').summernote({
 									lang: 'zh-CN',
 									height: 300,
 									focus: true,
@@ -81,7 +103,7 @@
 						</script>
 					</div>
 					<div class="col-xs-4 col-xs-offset-4">
-						<button type="submit" class="btn btn-primary" style="width:100%;">提交答案</button> 
+						<button type="button" class="btn btn-primary" style="width:100%;" onclick="check()">提交答案</button> 
 					</div>
 				</form>
 			</div>
@@ -98,6 +120,7 @@
 					$(document).ready(function(){
 						var qid= {{ qid }};
 						var attention_state={{ attention }};
+						var action = '0';
 						if (attention_state == '0'){
 							$('#attention').attr('class', 'btn btn-warning');
 							$('#attention').html('关注问题');

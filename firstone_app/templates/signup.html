@@ -14,8 +14,14 @@
 			var password2=$('#password2').val();
 			var email=$('#email').val();
 			var email_reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+			var password_reg = new RegExp("^[0-9a-zA-Z]+$");
 			if (username == ''){
-				$('#signup_status').html('用户名不能为空');
+				$('#signup_status').html('账号不能为空');
+				$('#signup_modal').modal('show');
+				return false;
+			}
+			else if (!password_reg.test(username)){
+				$('#signup_status').html('账号只能由数字和字母组成');
 				$('#signup_modal').modal('show');
 				return false;
 			}
@@ -41,7 +47,6 @@
 					return false;
 				}
 				else{
-					var password_reg = new RegExp("^[0-9a-zA-Z]+$");
 					if (!password_reg.test(password)){
 						$('#signup_status').html('密码只能由数字和字母组成');
 						$('#signup_modal').modal('show');

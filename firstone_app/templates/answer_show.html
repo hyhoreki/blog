@@ -38,8 +38,37 @@
 						<button class="btn btn-default" style="width:100%;">收藏</button>
 					</div>
 					<div class="col-xs-2">
-						<button class="btn btn-danger" style="width:100%;">赞同</button>
+						<button id="answer_agree" style="width:100%;"></button>
 					</div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							var aid = {{ aid }};
+							var agree_status = {{ agree_status }};
+							var action = '0'
+							if (agree_status == '0'){
+								$('#answer_agree').attr('class', 'btn btn-danger');
+								$('#answer_agree').html('赞同');
+								action = '1';
+							}else if(agree_status = '1'){
+								$('#answer_agree').attr('class', 'btn btn-primary');
+								$('#answer_agree').html('取消赞同');
+								action = '0';
+							}
+							$('#answer_agree').click(function(){
+								$.getJSON('/answer_agree/'+aid+'/'+action+'/',function(agree){
+									if(agree.status == '0'){
+										$('#answer_agree').attr('class', 'btn btn-danger');
+										$('#answer_agree').html('赞同');
+										action = '1';
+									}else if(agree.status == '1'){
+										$('#answer_agree').attr('class', 'btn btn-primary');
+										$('#answer_agree').html('取消赞同');
+										action = '0';
+									}
+								})
+							})
+						});
+					</script>
 				</div>
 			</div>
 	</div>

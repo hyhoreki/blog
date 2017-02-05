@@ -3,8 +3,8 @@ from django.db import models
 class Question(models.Model):
 	qid=models.AutoField(primary_key=True)
 	ask_user_id=models.IntegerField()
-	question_title=models.CharField(max_length=120)
-	question_describe=models.CharField(max_length=250)
+	question_title=models.CharField(max_length=30)
+	question_describe=models.CharField(max_length=100)
 	question_text=models.TextField()
 	question_time=models.DateTimeField(auto_now=True)
 	
