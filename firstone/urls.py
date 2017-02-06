@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from firstone_app import views as firstone_app_views
+from diary import views as diary_views
 
 urlpatterns = [
     url(r'^welcome/', firstone_app_views.index, name='welcome'),
@@ -31,5 +32,7 @@ urlpatterns = [
 	url(r'^answer/(\d+)/$', firstone_app_views.answer_show, name='answer_show'),
 	url(r'^attention_question/(\d+)/(\d+)/$', firstone_app_views.attention_question, name='attention_question'),
     url(r'^answer_delete/(\d+)/$', firstone_app_views.answer_delete, name='answer_delete'),
+    url(r'^answer_agree/(\d+)/(\d+)/$', firstone_app_views.agree_answer, name='agree_answer'),
+    url(r'^diary/', diary_views.home, name='diary_home'),
     url(r'^admin/', admin.site.urls),
 ]

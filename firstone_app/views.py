@@ -99,9 +99,9 @@ def question_show(request, qid):
 		question=Question.objects.get(qid=qid)
 		ask_user=User.objects.get(id=question.ask_user_id)
 		if Attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id):
-			attention = 1
+			attention_status = 1
 		else:
-			attention = 0
+			attention_status = 0
 		if request.method=="POST":
 			answer_user_id=request.user.id
 			answer_text=request.POST.get('answer_text', '')
@@ -110,9 +110,9 @@ def question_show(request, qid):
 		if Answer.objects.filter(answer_question_id=qid):
 			answer=Answer.objects.filter(answer_question_id=qid).order_by('?')[0]
 			answer_user=User.objects.get(id=answer.answer_user_id)
-			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'ask_user_id':answer.answer_user_id, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid, 'attention':attention})
+			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'ask_user_id':answer.answer_user_id, 'answer_text':answer.answer_text, 'answer_time':answer.answer_time, 'answer_user_nickname':answer_user.first_name, 'answer_aid':answer.aid, 'attention_status':attention_status})
 		else:
-			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':'', 'attention':attention})
+			return render(request, 'question_show.html', {'qid':qid, 'question_title':question.question_title, 'question_text':question.question_text, 'ask_user_nickname':ask_user.first_name, 'answer_user_nickname':'', 'attention_status':attention_status})
 	else:
 		return HttpResponseRedirect("/login/")
 		
@@ -126,10 +126,14 @@ def question_show_answer_show_more(request, qid):
 	
 def answer_show(request, aid):
 	if request.user is not None and request.user.is_active:
+		if Agree_answer.objects.filter(answer_id=aid, agree_user_id=request.user.id):
+			agree_status = 1
+		else:
+			agree_status = 0		
 		answer=Answer.objects.get(aid=aid)
 		question=Question.objects.get(qid=answer.answer_question_id)
 		answer_user=User.objects.get(id=answer.answer_user_id)
-		return render(request, 'answer_show.html', {'aid':aid, 'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text})
+		return render(request, 'answer_show.html', {'aid':aid, 'question_title':question.question_title, 'answer_user_nickname':answer_user.first_name, 'answer_text':answer.answer_text, 'agree_status':agree_status})
 	else:
 		return HttpResponseRedirect("/login/")
 		
@@ -137,10 +141,10 @@ def attention_question(request, qid, action):
 	if request.user is not None and request.user.is_active:
 		if action == '0':
 			Attention_question.objects.filter(question_id=qid, attention_user_id=request.user.id).delete()
-			attention_dict={'state':'0'}
+			attention_dict={'status':'0'}
 		elif action == '1':
 			Attention_question.objects.create(question_id=qid, attention_user_id=request.user.id)
-			attention_dict={'state':'1'}
+			attention_dict={'status':'1'}
 		attention_dict_json=json.dumps(attention_dict)
 		return HttpResponse(attention_dict_json, content_type='application/json')
 	else:
@@ -151,5 +155,18 @@ def answer_delete(request,aid):
 		qid=Answer.objects.get(aid=aid).answer_question_id
 		Answer.objects.get(aid=aid).delete()
 		return HttpResponseRedirect('/question/'+str(qid)+'/')
+	else:
+		return HttpResponseRedirect('/login/')
+
+def agree_answer(request, aid, action):
+	if request.user is not None and request.user.is_active:
+		if action == '0':
+			Agree_answer.objects.filter(answer_id=aid, agree_user_id=request.user.id).delete()
+			agree_dict={'status':'0'}
+		elif action == '1':
+			Agree_answer.objects.create(answer_id=aid, agree_user_id=request.user.id)
+			agree_dict={'status':'1'}
+		agree_dict_json=json.dumps(agree_dict)
+		return HttpResponse(agree_dict_json, content_type='application/json')
 	else:
 		return HttpResponseRedirect('/login/')

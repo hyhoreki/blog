@@ -27,6 +27,11 @@ class Answer(models.Model):
 	def __str__(self):
 		return self.answer_text
 
+class Agree_answer(models.Model):
+	agid=models.AutoField(primary_key=True)
+	answer_id=models.IntegerField(default=0)
+	agree_user_id=models.IntegerField(default=0)
+
 class Friend(models.Model):
 	fid=models.AutoField(primary_key=True)
 	friend_one=models.IntegerField(default=0)
