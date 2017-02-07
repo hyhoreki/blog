@@ -1,5 +1,28 @@
 .page {
 	border-radius: 25px 35px 35px 25px;
 	background-color: #21EBC2;
-	width: 100%;
+	width: 95%;
+	height: 100%;
+}
+.diary-title {
+	font-size: 30px;
+	text-align: center;
+	padding: 50px 0px 100px 0px;
+}
+.diary-username {
+	font-size: 20px;
+	text-align: center;
+	padding: 180px 0px 0px 0px;
+}
+.diary-setting {
+	min-width: 120px;
+	text-align: center;
+	background-color: #21EBC2;
+	border: 0px;
+	-webkit-box-shadow: none;
+}
+.btn-setting {
+	color: #fff;
+	background-color: #000;
+	border-color: #000;
 }
