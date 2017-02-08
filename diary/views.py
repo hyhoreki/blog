@@ -8,4 +8,10 @@ from .models import *
 import json
 
 def home(request):
-	return render(request, 'diary_index.html')
+	if request.user is not None and request.user.is_active:
+		if Diary.objects.filter(diary_user_id=request.user.id):
+			return render(request, 'diary_index.html')
+		else:
+			return render(request, 'diary_index.html', {'diary_create': '0'})
+	else:
+		return HttpResponseRedirect("/login/")

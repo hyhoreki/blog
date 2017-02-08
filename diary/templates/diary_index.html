@@ -43,7 +43,69 @@
 						</ul>
 					</div>
 				</div>
+				<div class="modal fade" id="Create_and_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<div class="modal-title" id="Create_and_change_title">测试标题</div>
+							<div class="modal-body">
+								<form id="diary_form" method="POST">
+								{% csrf_token %}
+								<div class="input_group">
+									<input id="diary_title" name="diary_title" class="form-control" placeholder="日记标题">
+								</div>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color1">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color3">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color4">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color5">
+									</label>
+								</div>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color1">1
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color2">2
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color3">3
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color4">4
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" name="options" id="color5">5
+									</label>
+								</div>
+							</div>
+							<div class="modal-footer dialog">
+								<button type="button" class="btn btn-primary">测试提交</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">测试关闭</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<script>
+				$(document).ready(function(){
+					var diary_create = {{ diary_create }};
+					if(diary_create == '0'){
+						$('#Create_and_change_title').html('创建日记');
+						$('#Create_and_change').modal('show');
+					}
+				});
+			</script>
 		</div>
 	</div>
 </body>
