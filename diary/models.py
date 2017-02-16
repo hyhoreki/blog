@@ -10,6 +10,7 @@ class Diary_Index_Info(models.Model):
 	diary_user_id=models.IntegerField(default=0)
 	diary_title=models.CharField(max_length=12)
 	diary_backgroud_mode=models.IntegerField(default=0)
-	diary_background_color=models.CharField(max_length=10)
+	diary_background_color=models.CharField(max_length=10,default='#21EBC2')
+	diary_font_color=models.CharField(max_length=10,default='#000000')
 	diary_background_img=models.TextField()
 	diary_music=models.TextField()

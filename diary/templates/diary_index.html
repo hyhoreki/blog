@@ -20,7 +20,7 @@
 			<div class='col-xs-12 page'>
 				<div class="row">
 					<div class='col-xs-8 col-xs-offset-2'>
-						<div class='diary-title'>我的日记标题</div>
+						<div class='diary-title'>{{ title }}</div>
 					</div>
 				</div>
 				<div class="row">
@@ -43,7 +43,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="modal fade" id="Create_and_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal fade" id="create_and_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
 					<div class="modal-dialog dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -54,45 +54,80 @@
 								<div class="input_group">
 									<input id="diary_title" name="diary_title" class="form-control" placeholder="日记标题">
 								</div>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color1">
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color2">
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color3">
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color4">
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color5">
-									</label>
+								<div class="row" style="margin: 20px 0px 0px 0px;">
+									<div class="col-xs-4" style="text-align: center;">背景颜色</div>
+									<div id="bg_color" class="btn-group col-xs-8" data-toggle="buttons">
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+									</div>
 								</div>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color1">1
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color2">2
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color3">3
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color4">4
-									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" name="options" id="color5">5
-									</label>
+								<div class="row" style="margin: 20px 0px 0px 0px;">
+									<div class="col-xs-4" style="text-align: center;">字体颜色</div>
+									<div id="font_color" class="btn-group col-xs-8" data-toggle="buttons">
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="000000">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+									</div>
+								</div>
+								<div class="row" style="margin: 20px 0px 0px 0px;">
+									<div class="col-xs-4" style="text-align: center;">预设音乐</div>
+									<div id="music" class="btn-group col-xs-8" data-toggle="buttons">
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="1">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+										<label class="btn btn-primary button-select">
+											<input type="radio" class="toggle" value="#21EBC2">
+										</label>
+									</div>
 								</div>
 							</div>
 							<div class="modal-footer dialog">
-								<button type="button" class="btn btn-primary">测试提交</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">测试关闭</button>
+								<button type="button" class="btn btn-primary" id="create">测试提交</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" id="close_and_return">测试关闭</button>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="create_report" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+				<div class="modal-dialog dialog">
+					<div class="modal-content">
+						<div class="modal-body">
+							<div id="create_status" style="text-align: center;"></div>
 						</div>
 					</div>
 				</div>
@@ -101,9 +136,33 @@
 				$(document).ready(function(){
 					var diary_create = {{ diary_create }};
 					if(diary_create == '0'){
-						$('#Create_and_change_title').html('创建日记');
-						$('#Create_and_change').modal('show');
+						$('#create_and_change_title').html('创建日记');
+						$('#create_and_change').modal({
+							keyboard:false
+						})
+						$('#create_and_change').modal('show');
 					}
+					$('#create').click(function(){
+						var diary_title = $('#diary_title').val();
+						var diary_bg_color = $('#bg_color input:radio:checked').val();
+						var diary_font_color = $('#font_color input:radio:checked').val();
+						var diary_music = $('#music input:radio:checked').val();
+						var create_status = '';
+						$.getJSON("/create_diary/"+diary_title+"/"+diary_bg_color+"/"+diary_font_color+"/"+diary_music+"/",function(create_status){
+							if (create_status.status == '1'){
+								$('#create_status').html('创建成功，正在进入...');
+								$('#create_report').modal('show');
+								window.location.href="/diary/";
+							}
+							else if (create_status.status == '0'){
+								$('#create_status').html('创建失败');
+								$('#create_report').modal('show');
+							}
+						})
+					})
+					$('#close_and_return').click(function(){
+						window.location.href="/welcome/";
+					})
 				});
 			</script>
 		</div>

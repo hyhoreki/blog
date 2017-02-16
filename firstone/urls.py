@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^answer_delete/(\d+)/$', firstone_app_views.answer_delete, name='answer_delete'),
     url(r'^answer_agree/(\d+)/(\d+)/$', firstone_app_views.agree_answer, name='agree_answer'),
     url(r'^diary/', diary_views.home, name='diary_home'),
+    url(r'^create_diary/([\u4e00-\u9fa5]+)/(.+)/(.+)/(.+)/$', diary_views.create_diary, name='create_diary'),
     url(r'^admin/', admin.site.urls),
 ]
