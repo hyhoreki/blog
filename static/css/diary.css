@@ -28,9 +28,18 @@
 }
 .dialog {
 	text-align: center;
+	margin: 10px 10px 10px 10px;
 }
 .button-select {
 	height: 20px;
 	margin: 1px 10px 1px 0px;
 	padding: 0px 10px;
+}
+.set-dialog {
+	text-align: center;
+	margin: 110px 10px 10px 10px;
+}
+.status-dialog {
+	text-align: center;
+	margin: 0px;
 }

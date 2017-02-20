@@ -19,11 +19,11 @@ from firstone_app import views as firstone_app_views
 from diary import views as diary_views
 
 urlpatterns = [
-    url(r'^welcome/', firstone_app_views.index, name='welcome'),
-    url(r'^login/', firstone_app_views.login, name='login'),
-    url(r'^signup/', firstone_app_views.signup, name='signup'),
-    url(r'^logout/', firstone_app_views.logout, name='logout'),
-    url(r'^userpage/', firstone_app_views.userpage, name='userpage'),
+    url(r'^welcome/$', firstone_app_views.index, name='welcome'),
+    url(r'^login/$', firstone_app_views.login, name='login'),
+    url(r'^signup/$', firstone_app_views.signup, name='signup'),
+    url(r'^logout/$', firstone_app_views.logout, name='logout'),
+    url(r'^userpage/$', firstone_app_views.userpage, name='userpage'),
     url(r'^index/(\d+)/$', firstone_app_views.blog_index, name='index'),
 	url(r'^question_update/', firstone_app_views.question_update, name='question_update'),
 	url(r'^question/(\d+)/$', firstone_app_views.question_show, name='question_show'),
@@ -33,7 +33,8 @@ urlpatterns = [
 	url(r'^attention_question/(\d+)/(\d+)/$', firstone_app_views.attention_question, name='attention_question'),
     url(r'^answer_delete/(\d+)/$', firstone_app_views.answer_delete, name='answer_delete'),
     url(r'^answer_agree/(\d+)/(\d+)/$', firstone_app_views.agree_answer, name='agree_answer'),
-    url(r'^diary/', diary_views.home, name='diary_home'),
+    url(r'^diary/$', diary_views.home, name='diary_home'),
     url(r'^create_diary/([\u4e00-\u9fa5]+)/(.+)/(.+)/(.+)/$', diary_views.create_diary, name='create_diary'),
+    url(r'^diary/([\u4e00-\u9fa5]+)/$', diary_views.diary_title_set, name='diary_title_set'),
     url(r'^admin/', admin.site.urls),
 ]

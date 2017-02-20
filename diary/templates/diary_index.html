@@ -17,7 +17,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class='col-xs-12 page'>
+			<div class='col-xs-12 page' style="background-color: {{ bg_color }};">
 				<div class="row">
 					<div class='col-xs-8 col-xs-offset-2'>
 						<div class='diary-title'>{{ title }}</div>
@@ -30,16 +30,16 @@
 				</div>
 				<div class="row">
 					<div class='col-xs-4 col-xs-offset-4'>
-						<div class='diary-username'>作者</div>
+						<div class='diary-username'>{{ request.user.first_name }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class='col-xs-1 dropup'>
 						<span class="glyphicon glyphicon-cog" style="color: rgb(0, 0, 0); font-size: 16px;" data-toggle="dropdown"></span>
 						<ul class="dropdown-menu diary-setting" role="menu">
-							<li><button type="button" class="btn btn-setting">标题设置</button></li>
-							<li><button type="button" class="btn btn-setting">背景设置</button></li>
-							<li><button type="button" class="btn btn-setting">音乐设置</button></li>
+							<li><button id="title_set" type="button" class="btn btn-setting">标题设置</button></li>
+							<li><button id="bg_set" type="button" class="btn btn-setting">背景设置</button></li>
+							<li><button id="music_set" type="button" class="btn btn-setting">音乐设置</button></li>
 						</ul>
 					</div>
 				</div>
@@ -47,7 +47,8 @@
 					<div class="modal-dialog dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<div class="modal-title" id="Create_and_change_title">测试标题</div>
+								<div class="modal-title">创建日记</div>
+							</div>
 							<div class="modal-body">
 								<form id="diary_form" method="POST">
 								{% csrf_token %}
@@ -123,11 +124,119 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="create_report" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
-				<div class="modal-dialog dialog">
+			<div class="modal fade" id="modal_title_set" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog set-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="modal-title">修改标题</div>
+						</div>
+						<div class="modal-body">
+							<div class="input_group">
+								<input id="new_title" class="form-control" placeholder="修改标题">
+							</div>
+						</div>
+						<div class="modal-footer dialog">
+							<button id="btn_title_set" type="button" class="btn btn-primary">测试提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">测试关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="modal_bg_set" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog set-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="modal-title">修改色调</div>
+						</div>
+						<div class="modal-body">
+							<div class="row" style="margin: 20px 0px 0px 0px;">
+								<div class="col-xs-4" style="text-align: center;">背景颜色</div>
+								<div id="bg_color" class="btn-group col-xs-8" data-toggle="buttons">
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+								</div>
+							</div>
+							<div class="row" style="margin: 20px 0px 0px 0px;">
+								<div class="col-xs-4" style="text-align: center;">字体颜色</div>
+								<div id="font_color" class="btn-group col-xs-8" data-toggle="buttons">
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="000000">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer dialog">
+							<button id="btn_bg_set" type="button" class="btn btn-primary">测试提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">测试关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="modal_music_set" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog set-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="modal-title">修改音乐</div>
+						</div>
+						<div class="modal-body">
+							<div class="row" style="margin: 20px 0px 0px 0px;">
+								<div class="col-xs-4" style="text-align: center;">预设音乐</div>
+								<div id="music" class="btn-group col-xs-8" data-toggle="buttons">
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="1">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+									<label class="btn btn-primary button-select">
+										<input type="radio" class="toggle" value="#21EBC2">
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer dialog">
+							<button id="btn_music_set" type="button" class="btn btn-primary">测试提交</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">测试关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog status-dialog">
 					<div class="modal-content">
 						<div class="modal-body">
-							<div id="create_status" style="text-align: center;"></div>
+							<div id="status_show" style="text-align: center;"></div>
 						</div>
 					</div>
 				</div>
@@ -150,20 +259,44 @@
 						var create_status = '';
 						$.getJSON("/create_diary/"+diary_title+"/"+diary_bg_color+"/"+diary_font_color+"/"+diary_music+"/",function(create_status){
 							if (create_status.status == '1'){
-								$('#create_status').html('创建成功，正在进入...');
-								$('#create_report').modal('show');
+								$('#status_show').html('创建成功，正在进入...');
+								$('#status').modal('show');
 								window.location.href="/diary/";
 							}
 							else if (create_status.status == '0'){
-								$('#create_status').html('创建失败');
-								$('#create_report').modal('show');
+								$('#status_show').html('创建失败');
+								$('#status').modal('show');
 							}
 						})
 					})
 					$('#close_and_return').click(function(){
 						window.location.href="/welcome/";
 					})
+					$('#title_set').click(function(){
+						$('#modal_title_set').modal('show');
+					})
+					$('#btn_title_set').click(function(){
+						var status = '';
+						var new_title = $('#new_title').val();
+						$.getJSON("/diary/"+new_title+"/",function(status){
+							if (status.error == '0'){
+								$('#status_show').html('修改成功');
+								$('#status').modal('show');
+								window.location.href="/diary/";
+							}
+							else if (status.error == '1'){
+								$('#status_show').html('修改失败');
+								$('#status').modal('show');
+							}
+						})
+					})
 				});
+				$('#bg_set').click(function(){
+					$('#modal_bg_set').modal('show');
+				})
+				$('#music_set').click(function(){
+					$('#modal_music_set').modal('show');
+				})
 			</script>
 		</div>
 	</div>
