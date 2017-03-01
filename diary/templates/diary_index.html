@@ -61,17 +61,17 @@
 										<label class="btn btn-primary button-select">
 											<input type="radio" class="toggle" value="21EBC2">
 										</label>
-										<label class="btn btn-primary button-select">
-											<input type="radio" class="toggle" value="#21EBC2">
+										<label class="btn btn-primary button-select btn_bg_2">
+											<input type="radio" class="toggle" value="D84520">
 										</label>
-										<label class="btn btn-primary button-select">
-											<input type="radio" class="toggle" value="#21EBC2">
+										<label class="btn btn-primary button-select btn_bg_3">
+											<input type="radio" class="toggle" value="CFBF8C">
 										</label>
-										<label class="btn btn-primary button-select">
-											<input type="radio" class="toggle" value="#21EBC2">
+										<label class="btn btn-primary button-select btn_bg_4">
+											<input type="radio" class="toggle" value="FF425D">
 										</label>
-										<label class="btn btn-primary button-select">
-											<input type="radio" class="toggle" value="#21EBC2">
+										<label class="btn btn-primary button-select btn_bg_5">
+											<input type="radio" class="toggle" value="6BC235">
 										</label>
 									</div>
 								</div>
@@ -151,27 +151,27 @@
 						<div class="modal-body">
 							<div class="row" style="margin: 20px 0px 0px 0px;">
 								<div class="col-xs-4" style="text-align: center;">背景颜色</div>
-								<div id="bg_color" class="btn-group col-xs-8" data-toggle="buttons">
+								<div id="set_bg_color" class="btn-group col-xs-8" data-toggle="buttons">
 									<label class="btn btn-primary button-select">
 										<input type="radio" class="toggle" value="21EBC2">
 									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" class="toggle" value="#21EBC2">
+									<label class="btn btn-primary button-select btn_bg_2">
+										<input type="radio" class="toggle" value="D84520">
 									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" class="toggle" value="#21EBC2">
+									<label class="btn btn-primary button-select btn_bg_3">
+										<input type="radio" class="toggle" value="CFBF8C">
 									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" class="toggle" value="#21EBC2">
+									<label class="btn btn-primary button-select btn_bg_4">
+										<input type="radio" class="toggle" value="FF425D">
 									</label>
-									<label class="btn btn-primary button-select">
-										<input type="radio" class="toggle" value="#21EBC2">
+									<label class="btn btn-primary button-select btn_bg_5">
+										<input type="radio" class="toggle" value="6BC235">
 									</label>
 								</div>
 							</div>
 							<div class="row" style="margin: 20px 0px 0px 0px;">
 								<div class="col-xs-4" style="text-align: center;">字体颜色</div>
-								<div id="font_color" class="btn-group col-xs-8" data-toggle="buttons">
+								<div id="set_font_color" class="btn-group col-xs-8" data-toggle="buttons">
 									<label class="btn btn-primary button-select">
 										<input type="radio" class="toggle" value="000000">
 									</label>
@@ -206,7 +206,7 @@
 						<div class="modal-body">
 							<div class="row" style="margin: 20px 0px 0px 0px;">
 								<div class="col-xs-4" style="text-align: center;">预设音乐</div>
-								<div id="music" class="btn-group col-xs-8" data-toggle="buttons">
+								<div id="set_music" class="btn-group col-xs-8" data-toggle="buttons">
 									<label class="btn btn-primary button-select">
 										<input type="radio" class="toggle" value="1">
 									</label>
@@ -290,13 +290,42 @@
 							}
 						})
 					})
+					$('#bg_set').click(function(){
+						$('#modal_bg_set').modal('show');
+					})
+					$('#btn_bg_set').click(function(){
+						var bg = $('#set_bg_color input:radio:checked').val();
+						var font = $('#set_font_color input:radio:checked').val();
+						$.getJSON("/diary/set_bg/"+bg+"/"+font+"/",function(status){
+							if (status.error == '0'){
+								$('#status_show').html('修改成功');
+								$('#status').modal('show');
+								window.location.href="/diary/";
+							}
+							else if (status.error == '1'){
+								$('#status_show').html('修改失败');
+								$('#status').modal('show');
+							}	
+						})
+					})
+					$('#music_set').click(function(){
+						$('#modal_music_set').modal('show');
+					})
+					$('#btn_music_set').click(function(){
+						var music = $('set_music input:radio:checked').val();
+						$.getJSON("/diary/set_music/"+music+"/",function(status){
+							if (status.error == '0'){
+								$('#status_show').html('修改成功');
+								$('#status').modal('show');
+								window.location.href="/diary/";
+							}
+							else if (status.error == '1'){
+								$('#status_show').html('修改失败');
+								$('#status').modal('show');
+							}	
+						})
+					})
 				});
-				$('#bg_set').click(function(){
-					$('#modal_bg_set').modal('show');
-				})
-				$('#music_set').click(function(){
-					$('#modal_music_set').modal('show');
-				})
 			</script>
 		</div>
 	</div>

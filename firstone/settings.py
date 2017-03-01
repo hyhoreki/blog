@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'firstone_app',
     'diary',
+	'DQX',
     'bootstrap_toolkit',
 ]
 

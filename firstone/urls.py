@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from firstone_app import views as firstone_app_views
 from diary import views as diary_views
+from DQX import views as dqx_views
 
 urlpatterns = [
     url(r'^welcome/$', firstone_app_views.index, name='welcome'),
@@ -36,5 +37,7 @@ urlpatterns = [
     url(r'^diary/$', diary_views.home, name='diary_home'),
     url(r'^create_diary/([\u4e00-\u9fa5]+)/(.+)/(.+)/(.+)/$', diary_views.create_diary, name='create_diary'),
     url(r'^diary/([\u4e00-\u9fa5]+)/$', diary_views.diary_title_set, name='diary_title_set'),
+    url(r'^diary/set_bg/(.+)/(.+)/$', diary_views.diary_bg_set, name='diary_bg_set'),
+    url(r'^DQX/$',dqx_views.)
     url(r'^admin/', admin.site.urls),
 ]

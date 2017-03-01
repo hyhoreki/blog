@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<title>DQX加点模拟器</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<style type="text/css">
+		.skill
+		{
+			color: #A9A9A9;
+			font-size: 6px;
+		}
+		.skill-active
+		{
+			color: #00BFFF;
+			font-size: 6px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div name="title" style="text-align: center;">欢迎使用DQX加点模拟器</div>
+		</div>
+		<div name="zs" class="row">
+			<div name="body">
+				<div name="zhanshi" style="text-align: center;">
+					<div class="col-xs-2">
+						<div name="zhanshi_title" class="row">
+							<div>战士</div>
+						</div>
+						<div class="row" name="level">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_level_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_level" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_level_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-8" style="text-align: right;">总技能点：</div>
+							<div id="zs_all_skill" class="col-xs-2" style="text-align: left;">0</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-8" style="text-align: right;">可用技能点：</div>
+							<div id="zs_skill" class="col-xs-2" style="text-align: left;">0</div>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>单手剑</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_1_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_1" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_1_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="zs_1_3" class="skill">+3 火炎斩：对目标造成1.2倍火属性伤害</p>
+							<p id="zs_1_7" class="skill">+7 装备单手剑时,攻击力增加5</p>
+							<p id="zs_1_13" class="skill">+13 龙斩：对龙系目标造成1.5倍伤害</p>
+							<p id="zs_1_22" class="skill">+22 装备单手剑时,会心一击率增加2%</p>
+							<p id="zs_1_35" class="skill">+35 奇迹剑技：对目标造成伤害,伤害的25%+20回复为自己的HP,回复量上限为100点</p>
+							<p id="zs_1_42" class="skill">+42 装备单手剑时,攻击力增加10</p>
+							<p id="zs_1_58" class="skill">+58 隼斩：对目标造成1.0倍 X 2回伤害,会心率5%</p>
+							<p id="zs_1_76" class="skill">+76 装备单手剑时,格挡率增加4%</p>
+							<p id="zs_1_88" class="skill">+88 装备单手剑时,攻击力增加15</p>
+							<p id="zs_1_100" class="skill">+100 光刃斩：以自己为中心,横扫周围的敌人造成光属性伤害,伤害受到攻击力与攻击魔力的影响</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>双手剑</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_2_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_2" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_2_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="zs_2_3" class="skill">+3 兵刃格挡：3分钟内,武器格挡率增加20%</p>
+							<p id="zs_2_7" class="skill">+7 装备双手剑时,攻击力增加10</p>
+							<p id="zs_2_13" class="skill">+13 巨龙冲击：对龙系目标造成1.5倍伤害</p>
+							<p id="zs_2_22" class="skill">+22 装备双手剑时,会心一击率增加2%</p>
+							<p id="zs_2_35" class="skill">+35 大回转：以目标为中心,横扫周围的敌人</p>
+							<p id="zs_2_42" class="skill">+42 装备双手剑时,格挡率增加4%</p>
+							<p id="zs_2_58" class="skill">+58 装备双手剑时,攻击力增加15</p>
+							<p id="zs_2_76" class="skill">+76 冰封之刃：对周围的敌人造成80-100的冰属性伤害,25%的概率追加7秒内行动不能的状态,攻击力在200以上时,威力进一步提高</p>
+							<p id="zs_2_88" class="skill">+88 装备双手剑时,攻击力增加20</p>
+							<p id="zs_2_100" class="skill">+100 奋力斩：劈砍目标,对其造成2倍伤害</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>斧</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_3_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_3" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_3_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="zs_3_3" class="skill">+3 装备斧时,攻击力增加5</p>
+							<p id="zs_3_7" class="skill">+7 巨木斩：对植物系目标造成1.5倍伤害</p>
+							<p id="zs_3_13" class="skill">+13 装备斧时,攻击力增加10</p>
+							<p id="zs_3_22" class="skill">+22 苍天魔斩：对目标造成3倍伤害,偶尔会追加麻痹效果</p>
+							<p id="zs_3_35" class="skill">+35 装备斧时,攻击力增加15</p>
+							<p id="zs_3_42" class="skill">+42 裂盔斩：对目标造成1.2倍伤害,高概率追加防御力降低效果</p>
+							<p id="zs_3_58" class="skill">+58 装备斧时,会心一击率增加2%</p>
+							<p id="zs_3_76" class="skill">+76 魔神斩:命中率50%,命中时必定会心一击</p>
+							<p id="zs_3_88" class="skill">+88 装备斧时,攻击力增加20</p>
+							<p id="zs_3_100" class="skill">+100 斧无双：以自己为中心,横扫周围的敌人,造成2.1-2.3倍伤害</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>盾</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_4_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_4" type="text" class="form-control" style="text-align: center;" value="0" data-skill="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_4_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="zs_4_6" class="skill">+6 装备盾时,格挡率增加1%</p>
+							<p id="zs_4_12" class="skill">+12 防御：约7秒内,受到的伤害减少25%</p>
+							<p id="zs_4_18" class="skill">+18 装备盾时,格挡率增加1%</p>
+							<p id="zs_4_25" class="skill">+25 大盾：3分钟内,盾格挡率上升</p>
+							<p id="zs_4_32" class="skill">+32 装备盾时,格挡率增加1%</p>
+							<p id="zs_4_40" class="skill">+40 盾击：对目标造成0.5倍伤害,约7秒内,自己受到的伤害减少25%</p>
+							<p id="zs_4_52" class="skill">+52 装备盾时,格挡率增加1%</p>
+							<p id="zs_4_66" class="skill">+66 守护之盾:2分钟内,50%概率免疫异常状态</p>
+							<p id="zs_4_82" class="skill">+82 装备盾时,防御力增加30</p>
+							<p id="zs_4_100" class="skill">+100 会心完全防御：2分钟内,受到的会心一击伤害完全减免</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>勇敢</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="zs_5_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="zs_5" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="zs_5_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="zs_5_8" class="skill">+8 保护(专)：短暂的时间内,替一个同伴承受伤害</p>
+							<p id="zs_5_16" class="skill">+16 所有职业耐力+5</p>
+							<p id="zs_5_28" class="skill">+28 所有职业力量+5</p>
+							<p id="zs_5_40" class="skill">+40 失意击：对目标造成1.1倍伤害,使目标斗志下降一段,愤怒状态解除</p>
+							<p id="zs_5_48" class="skill">+48 所有职业耐力+5</p>
+							<p id="zs_5_56" class="skill">+56 所有职业力量+5</p>
+							<p id="zs_5_70" class="skill">+70 冲撞(专)：对目标造成1.25倍伤害,高概率打断目标行动,并追加瘫痪效果</p>
+							<p id="zs_5_80" class="skill">+80 所有职业HP+30</p>
+							<p id="zs_5_90" class="skill">+90 所有职业耐力+10</p>
+							<p id="zs_5_100" class="skill">+100 断刃(专)：对目标造成1.3倍伤害,高概率使目标攻击力下降一段</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng">
+						</div>
+						<div name="xiaoguo">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div name="mfs" class="row">
+			<div name="body">
+				<div name="set_job_level">
+				</div>
+				<div name="zhanshi" style="text-align: center;">
+					<div class="col-xs-2">
+						<div name="job_title" class="row">
+							<div>魔法师</div>
+						</div>
+						<div class="row" name="level">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_level_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_level" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_level_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-8" style="text-align: right;">总技能点：</div>
+							<div id="mfs_all_skill" class="col-xs-2" style="text-align: left;">0</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-8" style="text-align: right;">可用技能点：</div>
+							<div id="mfs_skill" class="col-xs-2" style="text-align: left;">0</div>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>双手杖</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_1_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_1" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_1_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="mfs_1_3" class="skill">+3 能量吸收率+2%</p>
+							<p id="mfs_1_7" class="skill">+7 恶魔驱除：对恶魔系目标造成1.5倍伤害，50%的概率追加麻痹效果，持续25秒</p>
+							<p id="mfs_1_13" class="skill">+13 装备双手杖时，战斗结束时每次回复MP 2-4点</p>
+							<p id="mfs_1_21" class="skill">+21 速读之杖：2分钟内，咒文咏唱时间缩短</p>
+							<p id="mfs_1_31" class="skill">+31 装备双手杖时，攻击魔力增加30</p>
+							<p id="mfs_1_44" class="skill">+44 祝福之杖：回复一位同伴约80点HP</p>
+							<p id="mfs_1_57" class="skill">+57 装备双手杖时，攻击魔力增加30</p>
+							<p id="mfs_1_70" class="skill">+70 暴走魔法阵：在自身脚下设置一个魔法阵，阵中的咒文暴走率提升25%，所有阵中的同伴都能享受效果</p>
+							<p id="mfs_1_84" class="skill">+84 装备双手杖时，最大MP增加100</p>
+							<p id="mfs_1_100" class="skill">+100 装备双手杖时，战斗结束时每次回复MP 4-6点</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>短剑</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_2_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_2" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_2_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="mfs_2_3" class="skill">+3 蜂鸣飞刃：对虫系目标造成1.5倍伤害</p>
+							<p id="mfs_2_7" class="skill">+7 装备短剑时，攻击力增加5</p>
+							<p id="mfs_2_13" class="skill">+13 睡眠匕首：对目标造成1.1倍伤害，50%的概率追加睡眠效果，持续40秒</p>
+							<p id="mfs_2_22" class="skill">+22 装备短剑时，攻击时25%概率回复少量MP</p>
+							<p id="mfs_2_35" class="skill">+35 睡神狩猎：对目标造成1.5倍伤害，目标处于睡眠、混乱状态则是4倍伤害</p>
+							<p id="mfs_2_42" class="skill">+42 装备短剑时，攻击力增加10</p>
+							<p id="mfs_2_58" class="skill">+58 暗蛇毒牙：对目标造成1.1倍伤害，50%的概率追加中毒效果，持续60秒</p>
+							<p id="mfs_2_76" class="skill">+76 装备短剑时，会心一击率增加2%</p>
+							<p id="mfs_2_88" class="skill">+88 装备短剑时，攻击力增加15</p>
+							<p id="mfs_2_100" class="skill">+100 死神狩猎：对目标造成1.5倍伤害，目标处于中毒、麻痹状态则是4倍伤害</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>鞭</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_3_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_3" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_3_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="mfs_3_3" class="skill">+3 螺旋打：对目标造成1.1倍伤害，50%的概率追加混乱效果，持续40秒</p>
+							<p id="mfs_3_7" class="skill">+7 装备鞭时，攻击力增加5</p>
+							<p id="mfs_3_13" class="skill">+13 爱之鞭：对怪人系目标造成1.5倍伤害</p>
+							<p id="mfs_3_22" class="skill">+22 装备鞭时，攻击力增加5</p>
+							<p id="mfs_3_35" class="skill">+35 闪光打：对目标造成1.2倍、目标周围1.0倍光属性伤害，50%的概率追加失明效果</p>
+							<p id="mfs_3_42" class="skill">+42 束缚打：对目标造成1.1倍伤害，三分之一的概率追加麻痹效果</p>
+							<p id="mfs_3_58" class="skill">+58 装备鞭时，攻击力增加5</p>
+							<p id="mfs_3_76" class="skill">+76 地灵打:对前方范围内的目标全体造成1.5倍伤害</p>
+							<p id="mfs_3_88" class="skill">+88 使用鞭子攻击时，稍远一点的目标也可以打中</p>
+							<p id="mfs_3_100" class="skill">+100 双龙打：对目标造成2.0倍 X 2回伤害</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>盾</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_4_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_4" type="text" class="form-control" style="text-align: center;" value="0" data-skill="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_4_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="mfs_4_6" class="skill">+6 装备盾时,格挡率增加1%</p>
+							<p id="mfs_4_12" class="skill">+12 防御：约7秒内,受到的伤害减少25%</p>
+							<p id="mfs_4_18" class="skill">+18 装备盾时,格挡率增加1%</p>
+							<p id="mfs_4_25" class="skill">+25 大盾：3分钟内,盾格挡率上升</p>
+							<p id="mfs_4_32" class="skill">+32 装备盾时,格挡率增加1%</p>
+							<p id="mfs_4_40" class="skill">+40 盾击：对目标造成0.5倍伤害,约7秒内,自己受到的伤害减少25%</p>
+							<p id="mfs_4_52" class="skill">+52 装备盾时,格挡率增加1%</p>
+							<p id="mfs_4_66" class="skill">+66 守护之盾:2分钟内,50%概率免疫异常状态</p>
+							<p id="mfs_4_82" class="skill">+82 装备盾时,防御力增加30</p>
+							<p id="mfs_4_100" class="skill">+100 会心完全防御：2分钟内,受到的会心一击伤害完全减免</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng" class="row" style="text-align: center;">
+							<div>魔法</div> 
+						</div>
+						<div class="row">
+							<div class="input-group col-xs-8 col-xs-offset-2">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_5_cut" class="btn btn-danger" type="button">-</button>
+                    			</span>
+                    			<input id="mfs_5" type="text" class="form-control" style="text-align: center;" value="0">
+                    			<span class="input-group-btn">
+                        			<button id="mfs_5_add" class="btn btn-primary" type="button">+</button>
+                    			</span>
+                			</div>
+						</div>
+						<div name="xiaoguo" class="row">
+							<p id="mfs_5_8" class="skill">+8 魔结界：让自身获得攻击咒文耐性（20%）效果，最多可叠加2次（40%）</p>
+							<p id="mfs_5_18" class="skill">+18 所有职业的攻击魔力增加10</p>
+							<p id="mfs_5_26" class="skill">+26 所有职业的MP增加10</p>
+							<p id="mfs_5_38" class="skill">+38 诡异之光：降低目标的攻击咒文耐性（20%），最多可叠加2次（40%）</p>
+							<p id="mfs_5_46" class="skill">+46 所有职业的咒文暴走率上升</p>
+							<p id="mfs_5_54" class="skill">+54 所有职业的攻击魔力增加10</p>
+							<p id="mfs_5_68" class="skill">+68 魔力气息（专）：让自身获得MP徐徐回复效果</p>
+							<p id="mfs_5_78" class="skill">+78 所有职业的攻击魔力增加10</p>
+							<p id="mfs_5_88" class="skill">+88 所有职业的MP增加10</p>
+							<p id="mfs_5_100" class="skill">+100 魔力觉醒（专）：2分钟内，使自身的所有攻击咒文造成2.0倍伤害</p>
+						</div>
+					</div>
+					<div class="col-xs-2">
+						<div name="jineng">
+						</div>
+						<div name="xiaoguo">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div name="jisuan" class="col-xs-6 col-xs-offset-3">
+				<button id="final" class="btn btn-primary" style="width: 100%;">计算</button>
+			</div>
+		</div>
+		<div class="modal fade" id="modal_status" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog status-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div id="status" style="text-align: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			var dun_skill = 0;
+			var num_reg = new RegExp("^[0-9]+$")
+			$.extend({'level_check':function(name){
+				if (!num_reg.test($(name).val())){
+					$('#status').html('您输入的数值好像不对哦?');
+					$('#modal_status').modal('show');
+					return false;
+				}
+				else{
+					var level = Number($(name).val());
+					if (level < 0 && !num_reg.test(count)){
+						$('#status').html('您输入的数值好像不对哦?');
+						$('#modal_status').modal('show');
+						return false;
+					}else if (level > 75){
+						$('#status').html('你想要突破系统极限吗?');
+						$('#modal_status').modal('show');
+						return false;
+					}
+				}
+				$.level_skill(name);
+			}})
+			$.extend({'level_add':function(name){
+				var level = Number($(name).val());
+				if (level >= 75){
+					$('#status').html('你想要突破系统极限吗?');
+					$('#modal_status').modal('show');
+					return false;
+				}else{
+					level = level + 1;
+					$(name).val(level);
+				}
+			}})
+			$.extend({'level_cut':function(name){
+				var level = Number($(name).val());
+				if (level <= 0){
+					$('#status').html('负等级是要给我技能点的哦?');
+					$('#modal_status').modal('show');
+					return false;
+				}else{
+					level = level - 1;
+					$(name).val(level);
+				}
+			}})
+			$.extend({'dun_skill':function(name){
+				console.log(dun_skill);
+				var new_dun_skill = Number($(name).val());
+				var skill = Number($(name.split('_')[0]+'_skill').html());
+				var this_skill = Number($(name).data('skill'));
+				var change = 0;
+				if (new_dun_skill < 0){
+					new_dun_skill = 0;
+				}
+				if (new_dun_skill > 100){
+					new_dun_skill = 100;
+				}
+				if (new_dun_skill >= dun_skill){
+					change = new_dun_skill - dun_skill;
+					if(change > skill){
+						change = skill;
+					}
+					dun_skill = dun_skill + change;
+					console.log(dun_skill);
+					skill = skill - change;
+					this_skill = this_skill + change;
+					$(name).val(dun_skill);
+					$('#mfs_'+name.split('_')[1]).val(dun_skill);
+					$(name.split('_')[0]+'_skill').html(skill);
+					$(name).data('skill', this_skill);
+				}else{
+					change = dun_skill - new_dun_skill;
+					if (change > this_skill){
+						change = this_skill;
+					}
+					dun_skill = dun_skill - change;
+					console.log(dun_skill);
+					skill = skill + change;
+					this_skill = this_skill - change;
+					$('#zs'+name.split('_')[1]).val(dun_skill);
+					$('#mfs'+name.split('_')[1]).val(dun_skill);
+					$(name.split('_')[0]+'_skill').html(skill);
+					$(name).data('skill', this_skill);
+					console.log(dun_skill);
+				}
+			}})
+			$.extend({'level_skill':function(name){
+				var level = Number($(name).val());
+				var skill = 0;
+				var skill_old_all = Number($(name.split('_')[0]+'_all_skill').html());
+				var skill_nouse = Number($(name.split('_')[0]+'_skill').html());
+				if (level <= 75){
+					skill = 158;
+				}
+				if (level <= 74){
+					skill = 156;
+				}
+				if (level <= 73){
+					skill = 154;
+				}
+				if (level <= 72){
+					skill = 152;
+				}
+				if (level <= 71){
+					skill = 151;
+				}
+				if (level <= 70){
+					skill = 148;
+				}
+				if (level <= 69){
+					skill = 146;
+				}
+				if (level <= 68){
+					skill = 144;
+				}
+				if (level <= 67){
+					skill = 141;
+				}
+				if (level <= 66){
+					skill = 138;
+				}
+				if (level <= 65){
+					skill = 136;
+				}
+				if (level <= 64){
+					skill = 134;
+				}
+				if (level <= 63){
+					skill = 132;
+				}
+				if (level <= 62){
+					skill = 131;
+				}
+				if (level <= 61){
+					skill = 129;
+				}
+				if (level <= 60){
+					skill = 126;
+				}
+				if (level <= 59){
+					skill = 124;
+				}
+				if (level <= 58){
+					skill = 122;
+				}
+				if (level <= 57){
+					skill = 119;
+				}
+				if (level <= 56){
+					skill = 118;
+				}
+				if (level <= 55){
+					skill = 116;
+				}
+				if (level <= 54){
+					skill = 113;
+				}
+				if (level <= 52){
+					skill = 110;
+				}
+				if (level <= 51){
+					skill = 107;
+				}
+				if (level <= 49){
+					skill = 103;
+				}
+				if (level <= 48){
+					skill = 100;
+				}
+				if (level <= 46){
+					skill = 97;
+				}
+				if (level <= 45){
+					skill = 93;
+				}
+				if (level <= 43){
+					skill = 90;
+				}
+				if (level <= 42){
+					skill = 87;
+				}
+				if (level <= 40){
+					skill = 83;
+				}
+				if (level <= 39){
+					skill = 79;
+				}
+				if (level <= 37){
+					skill = 76;
+				}
+				if (level <= 36){
+					skill = 72;
+				}
+				if (level <= 34){
+					skill = 68;
+				}
+				if (level <= 33){
+					skill = 63;
+				}
+				if (level <= 31){
+					skill = 58;
+				}
+				if (level <= 30){
+					skill = 54;
+				}
+				if (level <= 28){
+					skill = 49;
+				}
+				if (level <= 27){
+					skill = 44;
+				}
+				if (level <= 25){
+					skill = 40;
+				}
+				if (level <= 24){
+					skill = 36;
+				}
+				if (level <= 22){
+					skill = 32;
+				}
+				if (level <= 21){
+					skill = 29;
+				}
+				if (level <= 19){
+					skill = 25;
+				}
+				if (level <= 18){
+					skill = 21;
+				}
+				if (level <= 16){
+					skill = 17;
+				}
+				if (level <= 15){
+					skill = 13;
+				}
+				if (level <= 13){
+					skill = 9;
+				}
+				if (level <= 12){
+					skill = 6;
+				}
+				if (level == 10){
+					skill = 3;
+				}
+				if (level < 10){
+					skill = 0;
+				}
+				if (skill < skill_old_all){
+					$('#status').html('请回收技能点');
+					$('#modal_status').modal('show');
+					return false;
+				}
+				$(name.split('_')[0]+'_all_skill').html(skill);
+				$(name.split('_')[0]+'_skill').html(skill_nouse + skill - skill_old_all);
+			}})
+			$.extend({'skill':function(name){
+				skill = Number($(name).val());
+				if (skill >= 3){
+					$(name+'_3').attr('class','skill-active');
+				}else{
+					$(name+'_3').attr('class','skill');
+				}
+				if (skill >= 7){
+					$(name+'_7').attr('class','skill-active');
+				}else{
+					$(name+'_7').attr('class','skill');
+				}
+				if (skill >= 13){
+					$(name+'_13').attr('class','skill-active');
+				}else{
+					$(name+'_13').attr('class','skill');
+				}
+				if (skill >= 22){
+					$(name+'_22').attr('class','skill-active');
+				}else{
+					$(name+'_22').attr('class','skill');
+				}
+				if (skill >= 35){
+					$(name+'_35').attr('class','skill-active');
+				}else{
+					$(name+'_35').attr('class','skill');
+				}
+				if (skill >= 42){
+					$(name+'_42').attr('class','skill-active');
+				}else{
+					$(name+'_42').attr('class','skill');
+				}
+				if (skill >= 58){
+					$(name+'_58').attr('class','skill-active');
+				}else{
+					$(name+'_58').attr('class','skill');
+				}
+				if (skill >= 76){
+					$(name+'_76').attr('class','skill-active');
+				}else{
+					$(name+'_76').attr('class','skill');
+				}
+				if (skill >= 88){
+					$(name+'_88').attr('class','skill-active');
+				}else{
+					$(name+'_88').attr('class','skill');
+				}
+				if (skill >= 100){
+					$(name+'_100').attr('class','skill-active');
+				}else{
+					$(name+'_100').attr('class','skill');
+				}
+			}})
+			$.extend({'skill2':function(name){
+				skill = Number($(name).val());
+				if (skill >= 6){
+					$(name+'_6').attr('class','skill-active');
+				}else{
+					$(name+'_6').attr('class','skill');
+				}
+				if (skill >= 12){
+					$(name+'_12').attr('class','skill-active');
+				}else{
+					$(name+'_12').attr('class','skill');
+				}
+				if (skill >= 18){
+					$(name+'_18').attr('class','skill-active');
+				}else{
+					$(name+'_18').attr('class','skill');
+				}
+				if (skill >= 25){
+					$(name+'_25').attr('class','skill-active');
+				}else{
+					$(name+'_25').attr('class','skill');
+				}
+				if (skill >= 32){
+					$(name+'_32').attr('class','skill-active');
+				}else{
+					$(name+'_32').attr('class','skill');
+				}
+				if (skill >= 40){
+					$(name+'_40').attr('class','skill-active');
+				}else{
+					$(name+'_40').attr('class','skill');
+				}
+				if (skill >= 52){
+					$(name+'_52').attr('class','skill-active');
+				}else{
+					$(name+'_52').attr('class','skill');
+				}
+				if (skill >= 66){
+					$(name+'_66').attr('class','skill-active');
+				}else{
+					$(name+'_66').attr('class','skill');
+				}
+				if (skill >= 82){
+					$(name+'_82').attr('class','skill-active');
+				}else{
+					$(name+'_82').attr('class','skill');
+				}
+				if (skill >= 100){
+					$(name+'_100').attr('class','skill-active');
+				}else{
+					$(name+'_100').attr('class','skill');
+				}
+			}})
+			$.extend({'skill3':function(name){
+				skill = Number($(name).val());
+				if (skill >= 8){
+					$(name+'_8').attr('class','skill-active');
+				}else{
+					$(name+'_8').attr('class','skill');
+				}
+				if (skill >= 16){
+					$(name+'_16').attr('class','skill-active');
+				}else{
+					$(name+'_16').attr('class','skill');
+				}
+				if (skill >= 28){
+					$(name+'_28').attr('class','skill-active');
+				}else{
+					$(name+'_28').attr('class','skill');
+				}
+				if (skill >= 40){
+					$(name+'_40').attr('class','skill-active');
+				}else{
+					$(name+'_40').attr('class','skill');
+				}
+				if (skill >= 48){
+					$(name+'_48').attr('class','skill-active');
+				}else{
+					$(name+'_48').attr('class','skill');
+				}
+				if (skill >= 56){
+					$(name+'_56').attr('class','skill-active');
+				}else{
+					$(name+'_56').attr('class','skill');
+				}
+				if (skill >= 70){
+					$(name+'_70').attr('class','skill-active');
+				}else{
+					$(name+'_70').attr('class','skill');
+				}
+				if (skill >= 80){
+					$(name+'_80').attr('class','skill-active');
+				}else{
+					$(name+'_80').attr('class','skill');
+				}
+				if (skill >= 90){
+					$(name+'_90').attr('class','skill-active');
+				}else{
+					$(name+'_90').attr('class','skill');
+				}
+				if (skill >= 100){
+					$(name+'_100').attr('class','skill-active');
+				}else{
+					$(name+'_100').attr('class','skill');
+				}
+			}})
+			$.extend({'skill4':function(name){
+				skill = Number($(name).val());
+				if (skill >= 3){
+					$(name+'_3').attr('class','skill-active');
+				}else{
+					$(name+'_3').attr('class','skill');
+				}
+				if (skill >= 7){
+					$(name+'_7').attr('class','skill-active');
+				}else{
+					$(name+'_7').attr('class','skill');
+				}
+				if (skill >= 13){
+					$(name+'_13').attr('class','skill-active');
+				}else{
+					$(name+'_13').attr('class','skill');
+				}
+				if (skill >= 21){
+					$(name+'_21').attr('class','skill-active');
+				}else{
+					$(name+'_21').attr('class','skill');
+				}
+				if (skill >= 31){
+					$(name+'_31').attr('class','skill-active');
+				}else{
+					$(name+'_31').attr('class','skill');
+				}
+				if (skill >= 44){
+					$(name+'_44').attr('class','skill-active');
+				}else{
+					$(name+'_44').attr('class','skill');
+				}
+				if (skill >= 57){
+					$(name+'_57').attr('class','skill-active');
+				}else{
+					$(name+'_57').attr('class','skill');
+				}
+				if (skill >= 70){
+					$(name+'_70').attr('class','skill-active');
+				}else{
+					$(name+'_70').attr('class','skill');
+				}
+				if (skill >= 84){
+					$(name+'_84').attr('class','skill-active');
+				}else{
+					$(name+'_84').attr('class','skill');
+				}
+				if (skill >= 100){
+					$(name+'_100').attr('class','skill-active');
+				}else{
+					$(name+'_100').attr('class','skill');
+				}
+			}})
+			$('#zs_level').change(function(){
+				$.level_check('#zs_level');
+			})
+			$('#mfs_level').change(function(){
+				$.level_check('#mfs_level');
+			})
+			$('#zs_4').change(function(){
+				$.dun_skill('#zs_4');
+				$.skill2('#zs_4');
+				$.skill2('#mfs_4');
+			})
+			$('#zs_4_add').click(function(){
+
+			})
+			$('#mfs_4').change(function(){
+				$.dun_skill('#mfs_4');
+				$.skill2('#zs_4');
+				$.skill2('#mfs_4');
+			})
+		});
+	</script>	
+</body>
+
+</html>

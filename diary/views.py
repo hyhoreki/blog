@@ -30,7 +30,20 @@ def create_diary(request, title, bg_color, font_color, music):
 def diary_title_set(request, new_title):
 	diary=Diary_Index_Info.objects.get(diary_user_id=request.user.id)
 	diary.diary_title=new_title
-	diary.save()
-	title_set={'error': '0'}
+	if diary.save():
+		title_set={'error': '0'}
+	else:
+		title_set={'error': '1'}
+	title_set_json=json.dumps(title_set)
+	return HttpResponse(title_set_json, content_type='application/json')
+
+def diary_bg_set(request, new_bg, new_font):
+	diary=Diary_Index_Info.objects.get(diary_user_id=request.user.id)
+	diary.diary_background_color=new_bg
+	diary.diary_font_color=new_font
+	if diary.save():
+		title_set={'error': '0'}
+	else:
+		title_set={'error': '1'}
 	title_set_json=json.dumps(title_set)
 	return HttpResponse(title_set_json, content_type='application/json')
